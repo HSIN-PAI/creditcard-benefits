@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026 信用卡權益終極全收錄</title>
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --bg-color: #f3f4f6;
+            --card-bg: #ffffff;
+            --text-color: #1f2937;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            padding-bottom: 80px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+            font-size: 1.6em;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #4b5563;
+            font-size: 0.9em;
+            margin-bottom: 25px;
+            background: #e5e7eb;
+            display: inline-block;
+            padding: 4px 16px;
+            border-radius: 20px;
+            position: relative;
+            left: 50%;
+            transform: translateX(-50%);
+            font-weight: bold;
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            font-size: 16px;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+        }
+
+        .search-box:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .card-list {
+            display: grid;
+            gap: 15px;
+        }
+
+        /* --- 卡片樣式 --- */
+        .credit-card {
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: 16px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            border-left: 6px solid var(--primary-color);
+            transition: transform 0.2s;
+            cursor: pointer;
+            position: relative;
+            padding-bottom: 40px;
+        }
+
+        .credit-card:active {
+            transform: scale(0.98);
+        }
+
+        .click-hint {
+            position: absolute;
+            bottom: 15px;
+            right: 15px;
+            font-size: 13px;
+            color: #2563eb;
+            display: flex;
+            align-items: center;
+            font-weight: 600;
+            background: #eff6ff;
+            padding: 4px 8px;
+            border-radius: 6px;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+
+        .card-name {
+            font-weight: bold;
+            font-size: 1.2em;
+            color: #111827;
+            padding-right: 10px;
+            line-height: 1.3;
+        }
+
+        .reward-rate {
+            background-color: #eff6ff;
+            color: #1d4ed8;
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 0.95em;
+            white-space: nowrap;
+        }
+
+        .merchant-tag {
+            display: inline-block;
+            background-color: #f3f4f6;
+            color: #4b5563;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.85em;
+            margin-right: 5px;
+            margin-bottom: 5px;
+        }
+
+        .note {
+            font-size: 0.9em;
+            color: #6b7280;
+            margin-top: 10px;
+            border-top: 1px dashed #e5e7eb;
+            padding-top: 8px;
+            line-height: 1.5;
+        }
+
+        /* --- Modal 視窗 --- */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            box-sizing: border-box;
+            backdrop-filter: blur(4px);
+        }
+
+        .modal-content {
+            background: white;
+            width: 100%;
+            max-width: 600px; /* 加寬一點方便閱讀 */
+            border-radius: 16px;
+            padding: 25px;
+            position: relative;
+            max-height: 90vh; /* 讓視窗盡量高 */
+            overflow-y: auto;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            animation: slideUp 0.3s ease-out;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #f3f4f6;
+            border: none;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 20px;
+            color: #666;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+        }
+
+        .modal-title {
+            font-size: 1.4em;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+            border-bottom: 2px solid #e5e7eb;
+            padding-bottom: 15px;
+            padding-right: 40px;
+        }
+
+        /* 詳細內容排版優化 */
+        .detail-body {
+            line-height: 1.6;
+            color: #374151;
+        }
+        
+        .section-box {
+            margin-bottom: 20px;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 15px;
+            background: #fff;
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            font-weight: bold;
+            color: #1f2937;
+            background: #f9fafb;
+            margin: -15px -15px 10px -15px;
+            padding: 10px 15px;
+            border-bottom: 1px solid #e5e7eb;
+            border-radius: 8px 8px 0 0;
+            font-size: 1.05em;
+        }
+
+        .section-title span {
+            background: #dbeafe;
+            color: #1e40af;
+            font-size: 0.8em;
+            padding: 2px 8px;
+            border-radius: 12px;
+            margin-left: auto;
+        }
+
+        .detail-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .detail-list li {
+            margin-bottom: 8px;
+            position: relative;
+            padding-left: 15px;
+        }
+
+        .detail-list li::before {
+            content: "•";
+            color: var(--primary-color);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        .category-label {
+            font-weight: bold;
+            color: #4b5563;
+            background: #f3f4f6;
+            padding: 0 4px;
+            border-radius: 4px;
+        }
+
+        .warning-box {
+            background: #fffbeb;
+            border: 1px solid #fcd34d;
+            color: #92400e;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 0.95em;
+        }
+
+        .highlight {
+            color: #dc2626;
+            font-weight: bold;
+        }
+        
+        /* 區隔線 */
+        .divider {
+            height: 1px;
+            background: #e5e7eb;
+            margin: 20px 0;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>💳 2026 信用卡權益全收錄</h1>
+    <div class="subtitle">依據 2025/12/22 終極詳細版製作</div>
+    
+    <input type="text" id="searchInput" class="search-box" placeholder="輸入關鍵字 (例：Steam、Uber、日本、全聯、AI)...">
+
+    <div id="cardList" class="card-list">
+        <!-- 卡片列表區 -->
+    </div>
+    
+    <div id="emptyState" style="text-align: center; display: none; color: #888; margin-top: 20px;">
+        找不到相關資訊 🥲
+    </div>
+</div>
+
+<!-- 彈跳視窗 -->
+<div id="modalOverlay" class="modal-overlay">
+    <div class="modal-content">
+        <button class="close-btn" onclick="closeModal()">×</button>
+        <div class="modal-title" id="modalTitle"></div>
+        <div class="detail-body" id="modalBody"></div>
+    </div>
+</div>
+
+<script>
+    // ==========================================
+    // 完整資料庫 - 逐字收錄
+    // ==========================================
+    const myCards = [
+        {
+            bank: "國泰世華",
+            name: "CUBE 卡",
+            merchants: ["全聯", "百貨", "日本", "充電", "蝦皮", "AI"],
+            rate: "3% 小樹點",
+            note: "每日可切換權益。Line Pay 為領券制 (2%)。2026/01/01起適用。",
+            details: `
+                <div class="warning-box">
+                    <b>💡 核心門檻 (Level 2 享 3%)：</b><br>
+                    需持有 CUBE 卡 + CUBE App 繳卡費 或 設定帳戶自動扣繳。<br>
+                    <i>(未達成僅 2%，財富管理貴賓享 Level 3 3.3%)</i>
+                </div>
+
+                <div class="section-box">
+                    <div class="section-title">集精選 <span>Level 2: 3%</span></div>
+                    <ul class="detail-list">
+                        <li><span class="category-label">量販超市</span> 家樂福 (含實體/App)、全聯福利中心 (含實體/PX Pay，不含大全聯)、LOPIA 台灣。</li>
+                        <li><span class="category-label">超商</span> 7-ELEVEN (實體/OPEN錢包)、全家便利商店 (實體/My FamiPay)。</li>
+                        <li><span class="category-label">加油/居家</span> 台灣中油 (直營站)、IKEA 宜家家居。</li>
+                        <li><span class="category-label">充電停車(新)</span> U-POWER、EVOASIS、EVALUE、TAIL、iCharging、車麻吉 (不含加油)、uTagGo (不含月租)。</li>
+                    </ul>
+                </div>
+
+                <div class="section-box">
+                    <div class="section-title">玩數位 <span>Level 2: 3.3%</span></div>
+                    <ul class="detail-list">
+                        <li><span class="category-label">電商</span> 蝦皮購物、momo購物網、PChome 24h購物、酷澎(Coupang台灣)、淘寶/天貓、小樹購。</li>
+                        <li><span class="category-label">串流</span> Netflix、Disney+、Spotify、YouTube Premium、Apple Media Services、Google Play、Max。</li>
+                        <li><span class="category-label">AI工具(新)</span> ChatGPT、Claude、Notion、Canva、Perplexity、Gemini、Speak。</li>
+                    </ul>
+                </div>
+
+                <div class="section-box">
+                    <div class="section-title">樂饗購 <span>Level 2: 3%</span></div>
+                    <ul class="detail-list">
+                        <li><span class="category-label">百貨</span> 遠東SOGO、遠東百貨、新光三越、微風廣場/信義/南山/松高、台北101。</li>
+                        <li><span class="category-label">藥妝服飾</span> 屈臣氏、康是美、寶雅、UNIQLO、ZARA、H&M、GU、無印良品、PULL&BEAR、Bershka。</li>
+                        <li><span class="category-label">餐飲</span> 全台餐廳實體消費。</li>
+                        <li><span class="category-label">星巴克</span> 官網/App 線上儲值享 <span class="highlight">6%</span>。</li>
+                    </ul>
+                </div>
+
+                <div class="section-box">
+                    <div class="section-title">趣旅行 <span>Level 2: 3.3%</span></div>
+                    <ul class="detail-list">
+                        <li><span class="category-label">海外消費</span> 日本、韓國、泰國、新加坡實體店面消費 (含餐飲/住宿)。</li>
+                        <li><span class="category-label">交通</span> 高鐵、Uber、Grab、台灣大車隊、yoxi、iRent、和運租車、格上租車、SUICA/PASMO/ICOCA 儲值。</li>
+                        <li><span class="category-label">旅遊平台</span> Klook、KKday、Agoda、Airbnb、Booking.com、Trip.com、易遊網、雄獅旅遊、可樂旅遊。</li>
+                    </ul>
+                </div>
+
+                <div class="section-box">
+                    <div class="section-title">慶生月 <span>壽星專屬</span></div>
+                    <ul class="detail-list">
+                        <li><span class="highlight">10%</span>：錢櫃、好樂迪、星聚點、享溫馨、指定遊樂園。</li>
+                        <li><span class="highlight">3.5%</span>：Uber Eats、新光三越、Klook、FunNow。</li>
+                    </ul>
+                </div>
+
+                <div class="warning-box">
+                    <b>⚠️ LINE Pay 特別領券：</b><br>
+                    下載 CUBE App 領券 + 當月滿 8 筆，享 2% (上限 100 點/月)。
+                </div>
+            `
+        },
+        {
+            bank: "台新銀行",
+            name: "Richart 卡 (全整合)",
+            merchants: ["Line Pay", "Steam", "遊戲", "網購", "全聯", "高鐵"],
+            rate: "3.8% 台新點",
+            note: "七大權益自由選。包含完整 Steam、遊戲、AI 等詳細通路。",
+            details: `
+                <div class="warning-box">
+                    <b>💡 核心門檻 (Level 2)：</b><br>
+                    需設定 <span class="highlight">Richart 帳戶自動扣繳信用卡費</span>。<br>
+                    <b>上限：</b>各方案加碼上限 1,000 點/月 (逐筆計算)。
+                </div>
+
+                <div class="section-box">
+                    <div class="section-title">1. Pay 著刷 <span>行動支付</span></div>
+                    <ul class="detail-list">
+                        <li><span class="highlight">3.8%</span>：台新 Pay、台灣 Pay (TWQR)。</li>
+                        <li><span class="highlight">2.3%</span>：LINE Pay (2026 新增)。</li>
+                    </ul>
+                </div>
+
+                <div class="section-box">
+                    <div class="section-title">2. 數趣刷 <span>3.3%</span></div>
+                    <ul class="detail-list">
+                        <li><span class="category-label">網購</span> 蝦皮、momo、酷澎(Coupang)、PChome、Amazon、淘寶、Yahoo購物、博客來、iHerb、SHEIN、Selfridges、Farfetch、Olive Young。</li>
+                        <li><span class="category-label">遊戲</span> Steam、MyCard、遊戲橘子、PlayStation、Nintendo、Xbox。</li>
+                        <li><span class="category-label">影音/課程</span> Netflix、Disney+、Youtube Premium、Hahow、PressPlay。</li>
+                        <li><span class="category-label">AI服務</span> ChatGPT、Notion、Canva、Perplexity、Claude。</li>
+                    </ul>
+                </div>
+
+                <div class="section-box">
+                    <div class="section-title">3. 天天刷 <span>3.3%</span></div>
+                    <ul class="detail-list">
+                        <li><span class="category-label">超商量販</span> 7-11、全家(限台新Pay)、全聯(限台新Pay)、家樂福、大買家、唐吉訶德、LOPIA。</li>
+                        <li><span class="category-label">交通</span> 高鐵、台鐵、Uber、yoxi、BOLT、中油直營、全國加油、EVOASIS、EVALUE。</li>
+                        <li><span class="category-label">藥妝</span> 寶雅、康是美、屈臣氏。</li>
+                    </ul>
+                </div>
+
+                <div class="section-box">
+                    <div class="section-title">4. 好饗刷 <span>3.3%</span></div>
+                    <ul class="detail-list">
+                        <li><span class="category-label">餐飲/外送</span> 全台餐廳實體消費、Uber Eats、foodpanda。</li>
+                        <li><span class="category-label">娛樂</span> 錢櫃、好樂迪、享溫馨、王品瘋Pay、FunNow、拓元、KKTIX、年代售票。</li>
+                    </ul>
+                </div>
+
+                <div class="section-box">
+                    <div class="section-title">5. 大筆刷 <span>3.3%</span></div>
+                    <ul class="detail-list">
+                        <li><span class="category-label">百貨</span> 新光三越、遠百、SOGO、漢神、微風、101、巨城、南紡、夢時代、統一時代、LaLaport、京站。</li>
+                        <li><span class="category-label">居家</span> IKEA、特力屋、宜得利、HOLA、迪卡儂。</li>
+                    </ul>
+                </div>
+
+                <div class="section-box">
+                    <div class="section-title">6. 玩旅刷 <span>3.3%</span></div>
+                    <ul class="detail-list">
+                        <li><span class="category-label">海外</span> 全球海外實體/網購。</li>
+                        <li><span class="category-label">航旅</span> 15 大航司 (華航/長榮/星宇/國泰/虎航等)、13 大旅行社、Agoda、Booking.com、SUICA/ICOCA。</li>
+                    </ul>
+                </div>
+
+                <div class="section-box">
+                    <div class="section-title">7. 假日刷 <span>2.0%</span></div>
+                    <ul class="detail-list">
+                        <li>週六、週日之不限通路一般消費 (含 LINE Pay、街口、保費)。</li>
+                    </ul>
+                </div>
+            `
+        },
+        {
+            bank: "台新銀行",
+            name: "Gogoro Rewards",
+            merchants: ["Gogoro", "GoShare", "7-11", "全家", "高鐵", "摩斯"],
+            rate: "10% 點數",
+            note: "電池資費 10% 無上限。指定夥伴通路 3%。",
+            details: `
+                <div class="warning-box">
+                    適用期間：2025/07/01 - 2025/12/31 (預期延續)
+                </div>
+
+                <div class="section-box">
+                    <div class="section-title">核心回饋</div>
+                    <ul class="detail-list">
+                        <li><span class="category-label">電池資費</span> <span class="highlight">10% 無上限</span> (需綁定 Gogoro Wallet 自動扣繳)。</li>
+                        <li><span class="category-label">購車</span> 實體門市購車最高 2% 無上限。</li>
+                    </ul>
+                </div>
+
+                <div class="section-box">
+                    <div class="section-title">指定夥伴通路 <span>3%</span></div>
+                    <div style="font-size:0.9em; margin-bottom:10px; color:#666;">(0.5% 基本 + 2.5% 加碼，加碼上限 500 點/月)</div>
+                    <ul class="detail-list">
+                        <li><span class="category-label">超商</span> 7-11、全家、萊爾富、OK超商。</li>
+                        <li><span class="category-label">速食</span> 摩斯漢堡。</li>
+                        <li><span class="category-label">交通</span> 高鐵、Uber、GoShare。</li>
+                        <li><span class="category-label">外送</span> Uber Eats、foodpanda。</li>
+                        <li><span class="category-label">旅遊</span> Klook、KKday。</li>
+                    </ul>
+                </div>
+            `
+        },
+        {
+            bank: "聯邦銀行",
+            name: "賴點卡",
+            merchants: ["國內", "國外", "萊爾富", "保費"],
+            rate: "1.3% / 3%",
+            note: "無腦刷首選。萊爾富 5% 現折。",
+            details: `
+                <div class="warning-box">
+                    適用期間：2025/07/01 - 2025/12/31
+                </div>
+
+                <div class="section-box">
+                    <div class="section-title">一般消費 (Line Points)</div>
+                    <ul class="detail-list">
+                        <li><span class="category-label">國內</span> <span class="highlight">1.3% 無上限</span> (需申辦電子帳單 + 綁定聯邦帳戶扣繳)。</li>
+                        <li><span class="category-label">國外</span> <span class="highlight">3.0% 無上限</span> (2.3% 基本 + 0.7% 加碼)。</li>
+                        <li><span class="category-label">保費</span> 1.0% 無上限。</li>
+                    </ul>
+                </div>
+
+                <div class="section-box">
+                    <div class="section-title">指定通路</div>
+                    <ul class="detail-list">
+                        <li><span class="category-label">萊爾富</span> 消費享 5% 現折 (不限金額)。</li>
+                    </ul>
+                </div>
+            `
+        },
+        {
+            bank: "玉山銀行",
+            name: "U Bear 卡",
+            merchants: ["網購", "行動支付", "Netflix", "Nintendo", "高鐵線上"],
+            rate: "3% / 10%",
+            note: "網購/Pay 3% (刷$7,500封頂)。無 Spotify。",
+            details: `
+                <div class="warning-box">
+                    適用期間：2025/09/01 - 2026/02/28<br>
+                    計算方式：逐筆消費無條件捨去。
+                </div>
+
+                <div class="section-box">
+                    <div class="section-title">網購/行動支付 <span>3%</span></div>
+                    <div style="font-size:0.9em; margin-bottom:10px; color:#666;">(1% 基本 + 2% 加碼，加碼上限 150 元，消費滿 $7,500 封頂)</div>
+                    <ul class="detail-list">
+                        <li><span class="category-label">支付</span> LINE Pay、街口支付、悠遊付、Pi 拍錢包、各類 App 綁定支付。</li>
+                        <li><span class="category-label">網購</span> momo、蝦皮、淘寶、PChome、酷澎、博客來。</li>
+                        <li><span class="category-label">交通</span> 高鐵線上購票。</li>
+                    </ul>
+                </div>
+
+                <div class="section-box">
+                    <div class="section-title">指定娛樂/影音 <span>10%</span></div>
+                    <div style="font-size:0.9em; margin-bottom:10px; color:#666;">(上限 100 元)</div>
+                    <ul class="detail-list">
+                        <li><span class="category-label">通路</span> Netflix、Disney+、Nintendo、PlayStation。</li>
+                        <li><span class="highlight">注意：</span> Spotify 已移出回饋名單。</li>
+                    </ul>
+                </div>
+            `
+        },
+        {
+            bank: "永豐銀行",
+            name: "Daway 卡",
+            merchants: ["Line Pay", "日韓泰越", "海外"],
+            rate: "新戶 6% / 舊戶 2%",
+            note: "Line Pay 專武。新戶最高 6% (需設定扣繳)。",
+            details: `
+                <div class="warning-box">
+                    適用期間：2025/07/01 - 2025/12/31
+                </div>
+
+                <div class="section-box">
+                    <div class="section-title">新戶優惠 (Line Pay)</div>
+                    <ul class="detail-list">
+                        <li><span class="highlight">最高 6%</span> (0.5% 基礎 + 1.5% 扣繳 + 4% 新戶)。</li>
+                        <li><b>門檻：</b>需設定永豐帳戶自動扣繳。</li>
+                        <li><b>上限：</b>4% 加碼每月上限 300 點 (消費滿 $7,500 封頂)。</li>
+                    </ul>
+                </div>
+
+                <div class="section-box">
+                    <div class="section-title">其他權益</div>
+                    <ul class="detail-list">
+                        <li><span class="category-label">舊戶</span> LINE Pay 2%。</li>
+                        <li><span class="category-label">海外</span> 2.5% LINE POINTS 無上限。</li>
+                        <li><span class="category-label">指定國家</span> 日韓泰越實體消費 5%~6% (依當期活動登錄)。</li>
+                    </ul>
+                </div>
+            `
+        },
+        {
+            bank: "永豐銀行",
+            name: "DAWHO 大戶卡",
+            merchants: ["旅遊", "外送", "電影", "Netflix", "KKTIX"],
+            rate: "7% / 8%",
+            note: "門檻：大戶資產 > 10萬。指定通路加碼 5% (刷$6,000封頂)。",
+            details: `
+                <div class="warning-box">
+                    <b>⚠️ 門檻：</b><br>
+                    帳戶平均資產需滿 NT$ 10 萬 (大戶等級)。<br>
+                    若為「大大等級」僅享 1% 基本回饋。
+                </div>
+
+                <div class="section-box">
+                    <div class="section-title">七大指定通路 <span>+5%</span></div>
+                    <div style="font-size:0.9em; margin-bottom:10px; color:#666;">(加碼上限 300 元，消費滿 $6,000 封頂)</div>
+                    <p>合計：國內指定 7% / 國外指定 8%</p>
+                    
+                    <ul class="detail-list">
+                        <li><span class="category-label">樂</span> 旅行社、免稅店、航空公司、飯店、Netflix、Disney+、Spotify、PlayStation、XBOX。</li>
+                        <li><span class="category-label">食</span> foodpanda、Uber Eats、各類外送平台。</li>
+                        <li><span class="category-label">玩</span> 兩廳院、寬宏、年代、拓元、KKTIX 等購票系統。</li>
+                        <li><span class="category-label">其餘</span> 寵物美容、學習平台 (Hahow/PressPlay)。</li>
+                    </ul>
+                </div>
+            `
+        },
+        {
+            bank: "永豐銀行",
+            name: "幣倍卡",
+            merchants: ["海外", "亞馬遜", "iHerb", "Amazon"],
+            rate: "3% / 7%",
+            note: "門檻：外幣資產 > 10萬(超匯)。海外/精選網購加碼 4%。",
+            details: `
+                <div class="warning-box">
+                    <b>⚠️ 門檻：</b><br>
+                    需為「超匯等級」：外幣往來資產滿等值 NT$ 10 萬，並設定外幣帳戶自動扣繳。
+                </div>
+
+                <div class="section-box">
+                    <div class="section-title">精選通路加碼 <span>最高 7%</span></div>
+                    <div style="font-size:0.9em; margin-bottom:10px; color:#666;">(加碼 4% 上限 300 元，消費滿 $7,500 封頂)</div>
+                    
+                    <ul class="detail-list">
+                        <li><span class="category-label">通路</span> 海外航空公司官網 (華航/長榮等)、海外實體商店、國外指定網購 (Amazon/eBay/iHerb)。</li>
+                        <li><span class="category-label">計算</span> 3% (超匯國外) + 4% (精選加碼) = 7%。</li>
+                    </ul>
+                </div>
+
+                <div class="section-box">
+                    <div class="section-title">一般消費</div>
+                    <ul class="detail-list">
+                        <li><span class="category-label">國外</span> 3% 無上限 (超匯等級)。</li>
+                        <li><span class="category-label">加碼</span> 日韓泰越特別加碼 (依官網登錄為準)。</li>
+                    </ul>
+                </div>
+            `
+        }
+    ];
+
+    // ==========================================
+    // 程式邏輯區
+    // ==========================================
+    const cardListEl = document.getElementById('cardList');
+    const searchInput = document.getElementById('searchInput');
+    const emptyState = document.getElementById('emptyState');
+    const modalOverlay = document.getElementById('modalOverlay');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalBody = document.getElementById('modalBody');
+
+    function renderCards(filterText = '') {
+        cardListEl.innerHTML = '';
+        const searchStr = filterText.toLowerCase();
+
+        const filteredData = myCards.filter(card => {
+            const contentToSearch = [
+                card.name, 
+                card.bank, 
+                ...card.merchants, 
+                card.note,
+                card.details || '' 
+            ].join(' ').toLowerCase();
+            return contentToSearch.includes(searchStr);
+        });
+
+        if (filteredData.length === 0) {
+            emptyState.style.display = 'block';
+        } else {
+            emptyState.style.display = 'none';
+        }
+
+        filteredData.forEach(card => {
+            const div = document.createElement('div');
+            div.className = 'credit-card';
+            div.onclick = () => openModal(card);
+
+            const merchantsHtml = card.merchants.map(m => `<span class="merchant-tag">#${m}</span>`).join('');
+            
+            div.innerHTML = `
+                <div class="card-header">
+                    <div class="card-name">${card.bank} ${card.name}</div>
+                    <div class="reward-rate">${card.rate}</div>
+                </div>
+                <div>${merchantsHtml}</div>
+                <div class="note">${card.note}</div>
+                <div class="click-hint">點擊查看詳細通路清單 📋</div>
+            `;
+            
+            cardListEl.appendChild(div);
+        });
+    }
+
+    function openModal(cardData) {
+        modalTitle.innerText = `${cardData.bank} ${cardData.name}`;
+        modalBody.innerHTML = cardData.details || '<p>無詳細資訊</p>';
+        modalOverlay.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+        modalOverlay.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+
+    modalOverlay.addEventListener('click', (e) => {
+        if (e.target === modalOverlay) closeModal();
+    });
+
+    searchInput.addEventListener('input', (e) => {
+        renderCards(e.target.value);
+    });
+
+    renderCards();
+</script>
+
+</body>
+</html>
