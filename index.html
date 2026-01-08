@@ -298,8 +298,8 @@
 <body>
 
 <div class="container">
-    <h1>💳 2026 信用卡權益全收錄</h1>
-    <div class="subtitle">依據 2025/12/22 終極詳細版製作</div>
+    <h1>💳 2026 上半年信用卡權益百科</h1>
+    <div class="subtitle">更新日期：2026/01/08 (適用至 2026/06/30)</div>
     
     <input type="text" id="searchInput" class="search-box" placeholder="輸入關鍵字 (例：Steam、Uber、日本、全聯、AI)...">
 
@@ -322,143 +322,138 @@
 </div>
 
 <script>
-    // ==========================================
-    // 完整資料庫 - 逐字收錄
+// ==========================================
+    // 2026 完整資料庫 - 依據 1/8 最新公告更新
     // ==========================================
     const myCards = [
         {
             bank: "國泰世華",
             name: "CUBE 卡",
-            merchants: ["全聯", "百貨", "日本", "充電", "蝦皮", "AI"],
-            rate: "3% 小樹點",
-            note: "每日可切換權益。Line Pay 為領券制 (2%)。2026/01/01起適用。",
+            merchants: ["全聯", "百貨", "日本", "充電", "蝦皮", "AI", "LINE Pay"],
+            rate: "3% ~ 3.3%",
+            note: "權益自選。注意：LINE Pay 改為「領券 + 月刷8筆」制。",
             details: `
                 <div class="warning-box">
-                    <b>💡 核心門檻 (Level 2 享 3%)：</b><br>
-                    需持有 CUBE 卡 + CUBE App 繳卡費 或 設定帳戶自動扣繳。<br>
-                    <i>(未達成僅 2%，財富管理貴賓享 Level 3 3.3%)</i>
+                    <b>💡 2026 核心變化：</b><br>
+                    1. 需持有 CUBE App + (繳卡費 或 設定自動扣繳) 才享 Level 2。<br>
+                    2. <span class="highlight">LINE Pay 規則大改</span>：需 App 領券 + 當月 CUBE 卡消費滿 8 筆 (不限金額)，才享 2% (加碼上限 100 點)。
                 </div>
 
                 <div class="section-box">
-                    <div class="section-title">集精選 <span>Level 2: 2%</span></div>
+                    <div class="section-title">玩數位 <span>3.3%</span></div>
                     <ul class="detail-list">
-                        <li><span class="category-label">量販超市</span> 家樂福 (含實體/App)、全聯福利中心 (含實體/PX Pay，不含大全聯)、LOPIA 台灣。</li>
-                        <li><span class="category-label">超商</span> 7-ELEVEN (實體/OPEN錢包)、全家便利商店 (實體/My FamiPay)。</li>
-                        <li><span class="category-label">加油/居家</span> 台灣中油 (直營站)、IKEA 宜家家居。</li>
-                        <li><span class="category-label">充電停車(新)</span> U-POWER、EVOASIS、EVALUE、TAIL、iCharging、車麻吉 (不含加油)、uTagGo (不含月租)。</li>
+                        <li><span class="category-label">AI工具(新)</span> ChatGPT, Claude, Notion, Canva, Perplexity, Gemini, Speak。</li>
+                        <li><span class="category-label">電商</span> 蝦皮購物、momo、酷澎(Coupang)、淘寶/天貓。</li>
+                        <li><span class="category-label">串流</span> Netflix、Disney+、Spotify、YouTube Premium。</li>
                     </ul>
                 </div>
 
                 <div class="section-box">
-                    <div class="section-title">玩數位 <span>Level 2: 3.3%</span></div>
+                    <div class="section-title">趣旅行 <span>3.3%</span></div>
                     <ul class="detail-list">
-                        <li><span class="category-label">電商</span> 蝦皮購物、momo購物網、PChome 24h購物、酷澎(Coupang台灣)、淘寶/天貓、小樹購。</li>
-                        <li><span class="category-label">串流</span> Netflix、Disney+、Spotify、YouTube Premium、Apple Media Services、Google Play、Max。</li>
-                        <li><span class="category-label">AI工具(新)</span> ChatGPT、Claude、Notion、Canva、Perplexity、Gemini、Speak。</li>
+                        <li><span class="category-label">海外實體</span> 日本、韓國、泰國、新加坡。</li>
+                        <li><span class="category-label">旅遊/交通</span> 高鐵、Uber、Klook、Agoda、Booking.com。</li>
                     </ul>
                 </div>
 
                 <div class="section-box">
-                    <div class="section-title">樂饗購 <span>Level 2: 3%</span></div>
+                    <div class="section-title">樂饗購 <span>3.3%</span></div>
                     <ul class="detail-list">
-                        <li><span class="category-label">百貨</span> 遠東SOGO、遠東百貨、新光三越、微風廣場/信義/南山/松高、台北101。</li>
-                        <li><span class="category-label">藥妝服飾</span> 屈臣氏、康是美、寶雅、UNIQLO、ZARA、H&M、GU、無印良品、PULL&BEAR、Bershka。</li>
                         <li><span class="category-label">餐飲</span> 全台餐廳實體消費。</li>
-                        <li><span class="category-label">星巴克</span> 官網/App 線上儲值享 <span class="highlight">6%</span>。</li>
+                        <li><span class="category-label">百貨/藥妝</span> 遠東SOGO、新光三越、遠東百貨、屈臣氏、康是美。</li>
+                        <li><span class="category-label">服飾</span> UNIQLO、ZARA、H&M、GU、無印良品。</li>
                     </ul>
                 </div>
 
                 <div class="section-box">
-                    <div class="section-title">趣旅行 <span>Level 2: 3.3%</span></div>
+                    <div class="section-title">集精選 <span>3.0%</span></div>
                     <ul class="detail-list">
-                        <li><span class="category-label">海外消費</span> 日本、韓國、泰國、新加坡實體店面消費 (含餐飲/住宿)。</li>
-                        <li><span class="category-label">交通</span> 高鐵、Uber、Grab、台灣大車隊、yoxi、iRent、和運租車、格上租車、SUICA/PASMO/ICOCA 儲值。</li>
-                        <li><span class="category-label">旅遊平台</span> Klook、KKday、Agoda、Airbnb、Booking.com、Trip.com、易遊網、雄獅旅遊、可樂旅遊。</li>
+                        <li><span class="category-label">日常</span> 全聯、家樂福、7-ELEVEN、全家便利商店、中油直營。</li>
+                        <li><span class="category-label">充電停車(新)</span> U-POWER、EVOASIS、EVALUE 等。</li>
                     </ul>
-                </div>
-
-                <div class="section-box">
-                    <div class="section-title">慶生月 <span>壽星專屬</span></div>
-                    <ul class="detail-list">
-                        <li><span class="highlight">10%</span>：錢櫃、好樂迪、星聚點、享溫馨、指定遊樂園。</li>
-                        <li><span class="highlight">3.5%</span>：Uber Eats、新光三越、Klook、FunNow。</li>
-                    </ul>
-                </div>
-
-                <div class="warning-box">
-                    <b>⚠️ LINE Pay 特別領券：</b><br>
-                    下載 CUBE App 領券 + 當月滿 8 筆，享 2% (上限 100 點/月)。
                 </div>
             `
         },
         {
             bank: "台新銀行",
-            name: "Richart 卡 (全整合)",
-            merchants: ["Line Pay", "Steam", "遊戲", "網購", "全聯", "高鐵"],
-            rate: "3.8% 台新點",
-            note: "七大權益自由選。包含完整 Steam、遊戲、AI 等詳細通路。",
+            name: "Richart 卡 (整合版)",
+            merchants: ["Line Pay", "AI", "KTV", "藥妝", "全聯", "高鐵"],
+            rate: "最高 3.8%",
+            note: "權益七選一。新增藥妝、KTV、AI 通路。需 Richart 自扣。",
             details: `
                 <div class="warning-box">
-                    <b>💡 核心門檻 (Level 2)：</b><br>
-                    需設定 <span class="highlight">Richart 帳戶自動扣繳信用卡費</span>。<br>
-                    <b>上限：</b>各方案加碼上限 1,000 點/月 (逐筆計算)。
+                    <b>💡 門檻：</b>需設定 <span class="highlight">Richart 帳戶自動扣繳</span> (未設定僅 0.3%)。<br>
+                    <b>上限：</b>各方案加碼上限 1,000 點/月。
                 </div>
 
                 <div class="section-box">
                     <div class="section-title">1. Pay 著刷 <span>行動支付</span></div>
                     <ul class="detail-list">
                         <li><span class="highlight">3.8%</span>：台新 Pay、台灣 Pay (TWQR)。</li>
-                        <li><span class="highlight">2.3%</span>：LINE Pay (2026 新增)。</li>
+                        <li><span class="highlight">2.3% (新)</span>：LINE Pay。</li>
                     </ul>
                 </div>
 
                 <div class="section-box">
                     <div class="section-title">2. 數趣刷 <span>3.3%</span></div>
                     <ul class="detail-list">
-                        <li><span class="category-label">網購</span> 蝦皮、momo、酷澎(Coupang)、PChome、Amazon、淘寶、Yahoo購物、博客來、iHerb、SHEIN、Selfridges、Farfetch、Olive Young。</li>
-                        <li><span class="category-label">遊戲</span> Steam、MyCard、遊戲橘子、PlayStation、Nintendo、Xbox。</li>
-                        <li><span class="category-label">影音/課程</span> Netflix、Disney+、Youtube Premium、Hahow、PressPlay。</li>
-                        <li><span class="category-label">AI服務</span> ChatGPT、Notion、Canva、Perplexity、Claude。</li>
+                        <li><span class="category-label">AI服務(新)</span> ChatGPT、Notion、Canva。</li>
+                        <li><span class="category-label">娛樂/電商</span> Steam、Nintendo、PSN、Netflix、Disney+、蝦皮、momo、酷澎。</li>
                     </ul>
                 </div>
 
                 <div class="section-box">
                     <div class="section-title">3. 天天刷 <span>3.3%</span></div>
                     <ul class="detail-list">
-                        <li><span class="category-label">超商量販</span> 7-11、全家(限台新Pay)、全聯(限台新Pay)、家樂福、大買家、唐吉訶德、LOPIA。</li>
-                        <li><span class="category-label">交通</span> 高鐵、台鐵、Uber、yoxi、BOLT、中油直營、全國加油、EVOASIS、EVALUE。</li>
-                        <li><span class="category-label">藥妝</span> 寶雅、康是美、屈臣氏。</li>
+                        <li><span class="category-label">藥妝(新)</span> 屈臣氏、康是美、寶雅。</li>
+                        <li><span class="category-label">超商量販</span> 7-11、全家、全聯、家樂福。</li>
+                        <li><span class="category-label">交通</span> 高鐵、台鐵、中油直營。</li>
                     </ul>
                 </div>
 
                 <div class="section-box">
                     <div class="section-title">4. 好饗刷 <span>3.3%</span></div>
                     <ul class="detail-list">
-                        <li><span class="category-label">餐飲/外送</span> 全台餐廳實體消費、Uber Eats、foodpanda。</li>
-                        <li><span class="category-label">娛樂</span> 錢櫃、好樂迪、享溫馨、王品瘋Pay、FunNow、拓元、KKTIX、年代售票。</li>
+                        <li><span class="category-label">KTV(新)</span> 錢櫃、好樂迪、享溫馨。</li>
+                        <li><span class="category-label">餐飲/外送</span> 全台餐廳、Uber Eats、foodpanda。</li>
                     </ul>
                 </div>
 
                 <div class="section-box">
-                    <div class="section-title">5. 大筆刷 <span>3.3%</span></div>
+                    <div class="section-title">5. 玩旅刷 <span>3.3%</span></div>
                     <ul class="detail-list">
-                        <li><span class="category-label">百貨</span> 新光三越、遠百、SOGO、漢神、微風、101、巨城、南紡、夢時代、統一時代、LaLaport、京站。</li>
-                        <li><span class="category-label">居家</span> IKEA、特力屋、宜得利、HOLA、迪卡儂。</li>
+                        <li><span class="category-label">旅遊</span> 海外消費、5大航空、13大旅行社、Agoda。</li>
+                    </ul>
+                </div>
+            `
+        },
+        {
+            bank: "星展銀行",
+            name: "eco ez 卡",
+            merchants: ["無腦刷", "特斯拉", "充電", "日韓美歐", "共享機車"],
+            rate: "1.5% / 10%",
+            note: "2026 新主力。國內 1.5% 無腦刷，綠色交通 10%。",
+            details: `
+                <div class="warning-box">
+                    <b>💡 門檻：</b>綠色加碼需使用<span class="highlight">電子帳單</span>。<br>
+                    回饋為「現金積點」1點=1元。
+                </div>
+
+                <div class="section-box">
+                    <div class="section-title">一般消費 <span>無上限</span></div>
+                    <ul class="detail-list">
+                        <li><span class="category-label">國內</span> 1.5% 無腦刷 (不限通路)。</li>
+                        <li><span class="category-label">國外</span> 2.5% (含實體與網購)。</li>
+                        <li><span class="category-label">指定國家</span> 日、韓、美、歐實體消費 <span class="highlight">3.5%</span> (需登錄)。</li>
                     </ul>
                 </div>
 
                 <div class="section-box">
-                    <div class="section-title">6. 玩旅刷 <span>3.3%</span></div>
+                    <div class="section-title">綠色加碼 <span>最高 10%</span></div>
+                    <div style="font-size:0.9em; margin-bottom:10px; color:#666;">(加碼上限 300 點/月)</div>
                     <ul class="detail-list">
-                        <li><span class="category-label">海外</span> 全球海外實體/網購。</li>
-                        <li><span class="category-label">航旅</span> 15 大航司 (華航/長榮/星宇/國泰/虎航等)、13 大旅行社、Agoda、Booking.com、SUICA/ICOCA。</li>
-                    </ul>
-                </div>
-
-                <div class="section-box">
-                    <div class="section-title">7. 假日刷 <span>2.0%</span></div>
-                    <ul class="detail-list">
-                        <li>週六、週日之不限通路一般消費 (含 LINE Pay、街口、保費)。</li>
+                        <li><span class="category-label">綠色交通 10%</span> 電動車充電 (Tesla/U-POWER)、共享機車 (GoShare/WeMo/iRent)。</li>
+                        <li><span class="category-label">綠色通路 5%</span> 生鮮有機超市、綠色餐飲。</li>
                     </ul>
                 </div>
             `
@@ -466,31 +461,24 @@
         {
             bank: "台新銀行",
             name: "Gogoro Rewards",
-            merchants: ["Gogoro", "GoShare", "7-11", "全家", "高鐵", "摩斯"],
+            merchants: ["Gogoro", "GoShare", "7-11", "全家", "高鐵"],
             rate: "10% 點數",
-            note: "電池資費 10% 無上限。指定夥伴通路 3%。",
+            note: "電池資費/GoShare 10%。",
             details: `
-                <div class="warning-box">
-                    適用期間：2025/07/01 - 2025/12/31 (預期延續)
-                </div>
-
                 <div class="section-box">
-                    <div class="section-title">核心回饋</div>
+                    <div class="section-title">Gogoro 生態系</div>
                     <ul class="detail-list">
                         <li><span class="category-label">電池資費</span> <span class="highlight">10% 無上限</span> (需綁定 Gogoro Wallet 自動扣繳)。</li>
-                        <li><span class="category-label">購車</span> 實體門市購車最高 2% 無上限。</li>
+                        <li><span class="category-label">GoShare</span> 10% (每期上限 100 點)。</li>
+                        <li><span class="category-label">購車</span> 最高 2% 無上限。</li>
                     </ul>
                 </div>
 
                 <div class="section-box">
-                    <div class="section-title">指定夥伴通路 <span>3%</span></div>
-                    <div style="font-size:0.9em; margin-bottom:10px; color:#666;">(0.5% 基本 + 2.5% 加碼，加碼上限 500 點/月)</div>
+                    <div class="section-title">夥伴通路 <span>3%</span></div>
                     <ul class="detail-list">
-                        <li><span class="category-label">超商</span> 7-11、全家、萊爾富、OK超商。</li>
-                        <li><span class="category-label">速食</span> 摩斯漢堡。</li>
-                        <li><span class="category-label">交通</span> 高鐵、Uber、GoShare。</li>
-                        <li><span class="category-label">外送</span> Uber Eats、foodpanda。</li>
-                        <li><span class="category-label">旅遊</span> Klook、KKday。</li>
+                        <li><span class="category-label">超商</span> 7-11、全家。</li>
+                        <li><span class="category-label">生活</span> 高鐵、Uber、Uber Eats、foodpanda、Klook。</li>
                     </ul>
                 </div>
             `
@@ -498,27 +486,27 @@
         {
             bank: "聯邦銀行",
             name: "賴點卡",
-            merchants: ["國內", "國外", "萊爾富", "保費"],
+            merchants: ["無腦刷", "萊爾富", "保費"],
             rate: "1.3% / 3%",
-            note: "無腦刷首選。萊爾富 5% 現折。",
+            note: "權益延至 2026/12/31。萊爾富 5%。",
             details: `
                 <div class="warning-box">
-                    適用期間：2025/07/01 - 2025/12/31
+                    <b>💡 門檻：</b>國內需綁定聯邦帳戶扣繳；國外需申辦電子帳單。
                 </div>
 
                 <div class="section-box">
-                    <div class="section-title">一般消費 (Line Points)</div>
+                    <div class="section-title">LINE POINTS 回饋</div>
                     <ul class="detail-list">
-                        <li><span class="category-label">國內</span> <span class="highlight">1.3% 無上限</span> (需申辦電子帳單 + 綁定聯邦帳戶扣繳)。</li>
-                        <li><span class="category-label">國外</span> <span class="highlight">3.0% 無上限</span> (2.3% 基本 + 0.7% 加碼)。</li>
+                        <li><span class="category-label">國內</span> 1.3% 無上限。</li>
+                        <li><span class="category-label">國外</span> 3.0% 無上限。</li>
                         <li><span class="category-label">保費</span> 1.0% 無上限。</li>
                     </ul>
                 </div>
 
                 <div class="section-box">
-                    <div class="section-title">指定通路</div>
+                    <div class="section-title">通路加碼</div>
                     <ul class="detail-list">
-                        <li><span class="category-label">萊爾富</span> 消費享 5% 現折 (不限金額)。</li>
+                        <li><span class="category-label">萊爾富</span> 消費享 <span class="highlight">5% 現折</span>。</li>
                     </ul>
                 </div>
             `
@@ -526,31 +514,30 @@
         {
             bank: "玉山銀行",
             name: "U Bear 卡",
-            merchants: ["網購", "行動支付", "Netflix", "Nintendo", "高鐵線上"],
+            merchants: ["網購", "行動支付", "Netflix", "Nintendo"],
             rate: "3% / 10%",
-            note: "網購/Pay 3% (刷$7,500封頂)。無 Spotify。",
+            note: "權益至 2026/02/28。網購 3%，指定影音 10%。",
             details: `
                 <div class="warning-box">
-                    適用期間：2025/09/01 - 2026/02/28<br>
-                    計算方式：逐筆消費無條件捨去。
+                    ⚠️ 預計 2026 三月將有新一輪調整。
                 </div>
 
                 <div class="section-box">
                     <div class="section-title">網購/行動支付 <span>3%</span></div>
-                    <div style="font-size:0.9em; margin-bottom:10px; color:#666;">(1% 基本 + 2% 加碼，加碼上限 150 元，消費滿 $7,500 封頂)</div>
+                    <div style="font-size:0.9em; margin-bottom:10px; color:#666;">(加碼 2% 上限 150 元，消費滿 $7,500 封頂)</div>
                     <ul class="detail-list">
-                        <li><span class="category-label">支付</span> LINE Pay、街口支付、悠遊付、Pi 拍錢包、各類 App 綁定支付。</li>
-                        <li><span class="category-label">網購</span> momo、蝦皮、淘寶、PChome、酷澎、博客來。</li>
+                        <li><span class="category-label">支付</span> LINE Pay、街口支付。</li>
+                        <li><span class="category-label">網購</span> momo、蝦皮、酷澎。</li>
                         <li><span class="category-label">交通</span> 高鐵線上購票。</li>
                     </ul>
                 </div>
 
                 <div class="section-box">
-                    <div class="section-title">指定娛樂/影音 <span>10%</span></div>
+                    <div class="section-title">指定娛樂 <span>10%</span></div>
                     <div style="font-size:0.9em; margin-bottom:10px; color:#666;">(上限 100 元)</div>
                     <ul class="detail-list">
-                        <li><span class="category-label">通路</span> Netflix、Disney+、Nintendo、PlayStation。</li>
-                        <li><span class="highlight">注意：</span> Spotify 已移出回饋名單。</li>
+                        <li>Netflix、Disney+、Nintendo、PlayStation。</li>
+                        <li><span class="highlight">注意：</span> 無 Spotify。</li>
                     </ul>
                 </div>
             `
@@ -558,29 +545,22 @@
         {
             bank: "永豐銀行",
             name: "Daway 卡",
-            merchants: ["Line Pay", "日韓泰越", "海外"],
+            merchants: ["Line Pay", "海外"],
             rate: "新戶 6% / 舊戶 2%",
-            note: "Line Pay 專武。新戶最高 6% (需設定扣繳)。",
+            note: "LINE Pay 專武。新戶最高 6% (需設定扣繳)。",
             details: `
-                <div class="warning-box">
-                    適用期間：2025/07/01 - 2025/12/31
-                </div>
-
                 <div class="section-box">
-                    <div class="section-title">新戶優惠 (Line Pay)</div>
+                    <div class="section-title">LINE Pay 回饋</div>
                     <ul class="detail-list">
-                        <li><span class="highlight">最高 6%</span> (0.5% 基礎 + 1.5% 扣繳 + 4% 新戶)。</li>
-                        <li><b>門檻：</b>需設定永豐帳戶自動扣繳。</li>
-                        <li><b>上限：</b>4% 加碼每月上限 300 點 (消費滿 $7,500 封頂)。</li>
+                        <li><span class="highlight">新戶 6%</span>：(基本 0.5% + 扣繳 1.5% + 新戶 4%)。<br>※ 新戶加碼上限 300 點 (刷 $7,500 封頂)。</li>
+                        <li><span class="category-label">舊戶</span> 2% LINE POINTS。</li>
                     </ul>
                 </div>
 
                 <div class="section-box">
-                    <div class="section-title">其他權益</div>
+                    <div class="section-title">海外消費</div>
                     <ul class="detail-list">
-                        <li><span class="category-label">舊戶</span> LINE Pay 2%。</li>
-                        <li><span class="category-label">海外</span> 2.5% LINE POINTS 無上限。</li>
-                        <li><span class="category-label">指定國家</span> 日韓泰越實體消費 5%~6% (依當期活動登錄)。</li>
+                        <li>2.5% LINE POINTS 無上限。</li>
                     </ul>
                 </div>
             `
@@ -588,14 +568,13 @@
         {
             bank: "永豐銀行",
             name: "DAWHO 大戶卡",
-            merchants: ["旅遊", "外送", "電影", "Netflix", "KKTIX"],
+            merchants: ["旅遊", "外送", "電影", "Netflix", "Xbox"],
             rate: "7% / 8%",
-            note: "門檻：大戶資產 > 10萬。指定通路加碼 5% (刷$6,000封頂)。",
+            note: "門檻：大戶資產 > 10萬。指定通路加碼 5%。",
             details: `
                 <div class="warning-box">
                     <b>⚠️ 門檻：</b><br>
-                    帳戶平均資產需滿 NT$ 10 萬 (大戶等級)。<br>
-                    若為「大大等級」僅享 1% 基本回饋。
+                    帳戶平均資產需滿 NT$ 10 萬 (大戶等級)。
                 </div>
 
                 <div class="section-box">
@@ -604,10 +583,9 @@
                     <p>合計：國內指定 7% / 國外指定 8%</p>
                     
                     <ul class="detail-list">
-                        <li><span class="category-label">樂</span> 旅行社、免稅店、航空公司、飯店、Netflix、Disney+、Spotify、PlayStation、XBOX。</li>
-                        <li><span class="category-label">食</span> foodpanda、Uber Eats、各類外送平台。</li>
-                        <li><span class="category-label">玩</span> 兩廳院、寬宏、年代、拓元、KKTIX 等購票系統。</li>
-                        <li><span class="category-label">其餘</span> 寵物美容、學習平台 (Hahow/PressPlay)。</li>
+                        <li><span class="category-label">樂</span> 旅行社、航空、飯店、Netflix、PlayStation、XBOX。</li>
+                        <li><span class="category-label">食</span> foodpanda、Uber Eats。</li>
+                        <li><span class="category-label">行</span> 電影院、兩廳院購票。</li>
                     </ul>
                 </div>
             `
@@ -615,30 +593,27 @@
         {
             bank: "永豐銀行",
             name: "幣倍卡",
-            merchants: ["海外", "亞馬遜", "iHerb", "Amazon"],
+            merchants: ["海外", "亞馬遜", "日韓泰越"],
             rate: "3% / 7%",
-            note: "門檻：外幣資產 > 10萬(超匯)。海外/精選網購加碼 4%。",
+            note: "門檻：外幣資產等值台幣 10 萬 (超匯)。日韓泰越實體加碼。",
             details: `
                 <div class="warning-box">
-                    <b>⚠️ 門檻：</b><br>
-                    需為「超匯等級」：外幣往來資產滿等值 NT$ 10 萬，並設定外幣帳戶自動扣繳。
+                    <b>⚠️ 門檻：</b>需為「超匯等級」(外幣資產達 10 萬)。
                 </div>
 
                 <div class="section-box">
-                    <div class="section-title">精選通路加碼 <span>最高 7%</span></div>
-                    <div style="font-size:0.9em; margin-bottom:10px; color:#666;">(加碼 4% 上限 300 元，消費滿 $7,500 封頂)</div>
-                    
+                    <div class="section-title">精選通路 <span>7%</span></div>
+                    <div style="font-size:0.9em; margin-bottom:10px; color:#666;">(加碼 4% 上限 300 元，刷 $7,500 封頂)</div>
                     <ul class="detail-list">
-                        <li><span class="category-label">通路</span> 海外航空公司官網 (華航/長榮等)、海外實體商店、國外指定網購 (Amazon/eBay/iHerb)。</li>
-                        <li><span class="category-label">計算</span> 3% (超匯國外) + 4% (精選加碼) = 7%。</li>
+                        <li>海外實體商店、海外航空公司、Amazon、eBay、iHerb。</li>
                     </ul>
                 </div>
 
                 <div class="section-box">
-                    <div class="section-title">一般消費</div>
+                    <div class="section-title">其他優惠</div>
                     <ul class="detail-list">
-                        <li><span class="category-label">國外</span> 3% 無上限 (超匯等級)。</li>
-                        <li><span class="category-label">加碼</span> 日韓泰越特別加碼 (依官網登錄為準)。</li>
+                        <li><span class="category-label">國外一般</span> 3% 無上限。</li>
+                        <li><span class="category-label">2026 加碼</span> 日韓泰越實體消費滿額享額外回饋 (需登錄)。</li>
                     </ul>
                 </div>
             `
@@ -722,4 +697,3 @@
 
 </body>
 </html>
-
