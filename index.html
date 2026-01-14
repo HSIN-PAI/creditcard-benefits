@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2026 信用卡權益百科 (含封頂試算)</title>
+    <title>2026 上半年信用卡權益百科</title>
     <style>
         :root {
-            --primary-color: #2563eb;
-            --bg-color: #f3f4f6;
+            --primary-color: #0ea5e9; /* 改用清爽的天空藍 */
+            --bg-color: #f8fafc;
             --card-bg: #ffffff;
-            --text-color: #1f2937;
+            --text-color: #334155;
         }
 
         body {
@@ -28,17 +28,18 @@
 
         h1 {
             text-align: center;
-            color: var(--primary-color);
+            color: #0f172a;
             margin-bottom: 5px;
             font-size: 1.6em;
+            font-weight: 800;
         }
 
         .subtitle {
             text-align: center;
-            color: #4b5563;
+            color: #64748b;
             font-size: 0.9em;
             margin-bottom: 25px;
-            background: #e5e7eb;
+            background: #e2e8f0;
             display: inline-block;
             padding: 4px 16px;
             border-radius: 20px;
@@ -51,16 +52,19 @@
         .search-box {
             width: 100%;
             padding: 15px;
-            border: 2px solid #e5e7eb;
+            border: 2px solid #e2e8f0;
             border-radius: 12px;
             font-size: 16px;
             margin-bottom: 20px;
             box-sizing: border-box;
+            background: white;
+            transition: all 0.3s;
         }
 
         .search-box:focus {
             outline: none;
             border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.2);
         }
 
         .card-list {
@@ -73,12 +77,12 @@
             background: var(--card-bg);
             padding: 20px;
             border-radius: 16px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
             border-left: 6px solid var(--primary-color);
-            transition: transform 0.2s;
+            transition: transform 0.2s, box-shadow 0.2s;
             cursor: pointer;
             position: relative;
-            padding-bottom: 40px;
+            padding-bottom: 45px;
         }
 
         .credit-card:active {
@@ -90,13 +94,13 @@
             bottom: 15px;
             right: 15px;
             font-size: 13px;
-            color: #2563eb;
+            color: var(--primary-color);
             display: flex;
             align-items: center;
             font-weight: 600;
-            background: #eff6ff;
-            padding: 4px 8px;
-            border-radius: 6px;
+            background: #e0f2fe;
+            padding: 4px 10px;
+            border-radius: 20px;
         }
 
         .card-header {
@@ -107,39 +111,41 @@
         }
 
         .card-name {
-            font-weight: bold;
-            font-size: 1.2em;
-            color: #111827;
+            font-weight: 800;
+            font-size: 1.25em;
+            color: #0f172a;
             padding-right: 10px;
             line-height: 1.3;
         }
 
         .reward-rate {
-            background-color: #eff6ff;
-            color: #1d4ed8;
-            padding: 4px 8px;
-            border-radius: 6px;
+            background-color: #0f172a;
+            color: #ffffff;
+            padding: 4px 10px;
+            border-radius: 8px;
             font-weight: bold;
             font-size: 0.95em;
             white-space: nowrap;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
         .merchant-tag {
             display: inline-block;
-            background-color: #f3f4f6;
-            color: #4b5563;
+            background-color: #f1f5f9;
+            color: #475569;
             padding: 4px 8px;
-            border-radius: 4px;
+            border-radius: 6px;
             font-size: 0.85em;
             margin-right: 5px;
             margin-bottom: 5px;
+            font-weight: 500;
         }
 
         .note {
             font-size: 0.9em;
-            color: #6b7280;
+            color: #64748b;
             margin-top: 10px;
-            border-top: 1px dashed #e5e7eb;
+            border-top: 1px dashed #cbd5e1;
             padding-top: 8px;
             line-height: 1.5;
         }
@@ -152,7 +158,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.6);
+            background: rgba(15, 23, 42, 0.7);
             z-index: 1000;
             justify-content: center;
             align-items: center;
@@ -165,12 +171,12 @@
             background: white;
             width: 100%;
             max-width: 600px;
-            border-radius: 16px;
+            border-radius: 20px;
             padding: 25px;
             position: relative;
             max-height: 90vh;
             overflow-y: auto;
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
             animation: slideUp 0.3s ease-out;
         }
 
@@ -183,61 +189,66 @@
             position: absolute;
             top: 15px;
             right: 15px;
-            background: #f3f4f6;
+            background: #f1f5f9;
             border: none;
-            width: 32px;
-            height: 32px;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
             cursor: pointer;
             font-size: 20px;
-            color: #666;
+            color: #64748b;
             display: flex;
             align-items: center;
             justify-content: center;
             z-index: 10;
+            transition: background 0.2s;
+        }
+        
+        .close-btn:hover {
+            background: #e2e8f0;
         }
 
         .modal-title {
-            font-size: 1.4em;
-            font-weight: bold;
-            margin-bottom: 15px;
-            color: var(--primary-color);
-            border-bottom: 2px solid #e5e7eb;
+            font-size: 1.5em;
+            font-weight: 800;
+            margin-bottom: 20px;
+            color: #0f172a;
+            border-bottom: 2px solid #e2e8f0;
             padding-bottom: 15px;
             padding-right: 40px;
         }
 
         .detail-body {
-            line-height: 1.6;
-            color: #374151;
+            line-height: 1.7;
+            color: #334155;
         }
         
         .section-box {
             margin-bottom: 20px;
-            border: 1px solid #e5e7eb;
-            border-radius: 8px;
-            padding: 15px;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 16px;
             background: #fff;
         }
 
         .section-title {
             display: flex;
             align-items: center;
-            font-weight: bold;
-            color: #1f2937;
-            background: #f9fafb;
-            margin: -15px -15px 10px -15px;
-            padding: 10px 15px;
-            border-bottom: 1px solid #e5e7eb;
-            border-radius: 8px 8px 0 0;
+            font-weight: 700;
+            color: #1e293b;
+            background: #f8fafc;
+            margin: -16px -16px 12px -16px;
+            padding: 12px 16px;
+            border-bottom: 1px solid #e2e8f0;
+            border-radius: 12px 12px 0 0;
             font-size: 1.05em;
         }
 
         .section-title span {
-            background: #dbeafe;
-            color: #1e40af;
+            background: #bae6fd;
+            color: #0369a1;
             font-size: 0.8em;
-            padding: 2px 8px;
+            padding: 2px 10px;
             border-radius: 12px;
             margin-left: auto;
         }
@@ -251,7 +262,7 @@
         .detail-list li {
             margin-bottom: 8px;
             position: relative;
-            padding-left: 15px;
+            padding-left: 18px;
         }
 
         .detail-list li::before {
@@ -260,24 +271,39 @@
             position: absolute;
             left: 0;
             font-weight: bold;
+            font-size: 1.2em;
+            top: -2px;
         }
 
         .category-label {
-            font-weight: bold;
-            color: #4b5563;
-            background: #f3f4f6;
-            padding: 0 4px;
+            font-weight: 700;
+            color: #475569;
+            background: #f1f5f9;
+            padding: 2px 6px;
             border-radius: 4px;
+            font-size: 0.9em;
+            margin-right: 4px;
         }
 
         .warning-box {
             background: #fffbeb;
             border: 1px solid #fcd34d;
             color: #92400e;
-            padding: 12px;
-            border-radius: 8px;
+            padding: 14px;
+            border-radius: 12px;
             margin-bottom: 20px;
             font-size: 0.95em;
+        }
+        
+        .calc-box {
+            background: #f0fdf4;
+            border: 1px solid #86efac;
+            color: #166534;
+        }
+        
+        .calc-title {
+            background: #dcfce7 !important;
+            color: #14532d !important;
         }
 
         .highlight {
@@ -291,16 +317,17 @@
 
 <div class="container">
     <h1>💳 2026 上半年信用卡權益百科</h1>
-    <div class="subtitle">更新日期：2026/01/14 (含封頂試算)</div>
+    <div class="subtitle">更新日期：2026/01/14</div>
     
-    <input type="text" id="searchInput" class="search-box" placeholder="輸入關鍵字 (例：LINE Pay、日本、全聯、AI)...">
+    <input type="text" id="searchInput" class="search-box" placeholder="🔍 搜尋：LINE Pay、日本、封頂、AI...">
 
     <div id="cardList" class="card-list">
         <!-- 卡片列表區 -->
     </div>
     
-    <div id="emptyState" style="text-align: center; display: none; color: #888; margin-top: 20px;">
-        找不到相關資訊 🥲
+    <div id="emptyState" style="text-align: center; display: none; color: #94a3b8; margin-top: 30px;">
+        <p style="font-size: 3em; margin-bottom: 10px;">🧐</p>
+        找不到相關資訊，試試別的關鍵字？
     </div>
 </div>
 
@@ -315,7 +342,7 @@
 
 <script>
     // ==========================================
-    // 2026/01/14 最終修訂版 (含封頂試算)
+    // 2026/01/14 最終修訂版 (全卡別再次查核)
     // ==========================================
     const myCards = [
         {
@@ -326,13 +353,13 @@
             note: "權益自選。注意：LINE Pay 改為「領券 + 8筆任務」制。",
             details: `
                 <div class="warning-box">
-                    <b>💡 2026 重大變更：</b><br>
+                    <b>💡 2026 核心機制：</b><br>
                     1. 需持有 CUBE App + (繳卡費 或 設定自動扣繳) 才享 Level 2。<br>
                     2. <span class="highlight">LINE Pay</span>：需 App 領券 + 當月 CUBE 卡消費滿 8 筆，才享 2%。
                 </div>
 
-                <div class="section-box" style="border-color: #fcd34d; background: #fffdf0;">
-                    <div class="section-title" style="background: #fffbeb;">💰 封頂試算 (刷多少就不划算?)</div>
+                <div class="section-box calc-box">
+                    <div class="section-title calc-title">💰 封頂試算</div>
                     <ul class="detail-list">
                         <li><b>五大隨選方案</b>：<span class="highlight">無上限</span>。適合大額消費、出國旅遊、買 Apple。</li>
                         <li><b>LINE Pay (2%)</b>：加碼上限 100 點。<br>👉 <span class="highlight">刷 NT$ 5,000 封頂</span> (超過後僅剩 0.3%)。</li>
@@ -352,33 +379,30 @@
         },
         {
             bank: "台新銀行",
-            name: "Richart 卡 (整合版)",
-            merchants: ["Line Pay", "AI", "KTV", "藥妝", "全聯", "高鐵"],
-            rate: "最高 3.8%",
-            note: "權益七選一。新增藥妝、KTV、AI 通路。需 Richart 自扣。",
+            name: "@GoGo 卡",
+            merchants: ["Line Pay", "蝦皮", "momo", "酷澎", "網購"],
+            rate: "3.8%",
+            note: "行動支付/網購 3.8%。全盈Pay已移除。需 Richart 自扣。",
             details: `
                 <div class="warning-box">
-                    <b>💡 門檻：</b>需設定 <span class="highlight">Richart 帳戶自動扣繳</span> (未設定僅 0.3%)。<br>
-                    每期加碼上限 1,000 點。
+                    <b>💡 2026 變動提醒：</b><br>
+                    1. <span class="highlight">全盈+PAY 已移除</span>回饋名單。<br>
+                    2. 需設定 <span class="highlight">Richart 帳戶自動扣繳</span> (未設定僅 0.3%)。<br>
+                    3. 每期加碼上限 1,000 點 (台新 Point)。
                 </div>
 
-                <div class="section-box" style="border-color: #fcd34d; background: #fffdf0;">
-                    <div class="section-title" style="background: #fffbeb;">💰 封頂試算</div>
+                <div class="section-box calc-box">
+                    <div class="section-title calc-title">💰 封頂試算</div>
                     <ul class="detail-list">
-                        <li><b>行動支付 (3.8% 方案)</b>：👉 <span class="highlight">刷 NT$ 28,571 封頂</span>。</li>
-                        <li><b>其他權益 (3.3% 方案)</b>：👉 <span class="highlight">刷 NT$ 33,333 封頂</span>。</li>
-                        <li><b>LINE Pay (2.3% 方案)</b>：👉 <span class="highlight">刷 NT$ 50,000 封頂</span>。</li>
+                        <li><b>精選通路 (3.8%)</b>：加碼 3.5% 上限 1,000 點。<br>👉 <span class="highlight">刷 NT$ 28,571 封頂</span> (超過後剩 0.3%)。</li>
                     </ul>
                 </div>
 
                 <div class="section-box">
-                    <div class="section-title">七大權益選一</div>
+                    <div class="section-title">精選消費 3.8%</div>
                     <ul class="detail-list">
-                        <li><span class="category-label">1. Pay著刷</span> 台新Pay/台灣Pay 3.8%、LINE Pay 2.3%。</li>
-                        <li><span class="category-label">2. 數趣刷 3.3%</span> AI服務 (ChatGPT/Canva)、Steam、Netflix、蝦皮、momo。</li>
-                        <li><span class="category-label">3. 天天刷 3.3%</span> 屈臣氏、康是美、寶雅、超商、全聯、家樂福。</li>
-                        <li><span class="category-label">4. 好饗刷 3.3%</span> KTV (錢櫃/好樂迪)、全台餐廳、外送。</li>
-                        <li><span class="category-label">5. 玩旅刷 3.3%</span> 海外消費、航空、旅行社、Agoda。</li>
+                        <li><span class="category-label">行動支付</span> LINE Pay、台新 Pay。</li>
+                        <li><span class="category-label">網購</span> 蝦皮、momo、酷澎 (Coupang)、PChome、Yahoo、Amazon。</li>
                     </ul>
                 </div>
             `
@@ -397,8 +421,8 @@
                     3. GoShare 已移除 10% 回饋名單。
                 </div>
 
-                <div class="section-box" style="border-color: #fcd34d; background: #fffdf0;">
-                    <div class="section-title" style="background: #fffbeb;">💰 封頂試算 (刷多少就不划算?)</div>
+                <div class="section-box calc-box">
+                    <div class="section-title calc-title">💰 封頂試算 (刷多少就不划算?)</div>
                     <ul class="detail-list">
                         <li><b>海外指定 (5%)</b>：加碼 4% 上限 600 點。<br>👉 <span class="highlight">刷 NT$ 15,000 封頂</span> (超過剩 1%)。<br><i>(適用：日/韓/泰/新/美/歐 實體消費)</i></li>
                         <li><b>綠色消費 (10%)</b>：加碼 9% 上限 300 點。<br>👉 <span class="highlight">刷 NT$ 3,333 封頂</span> (超過剩 1%)。</li>
@@ -413,14 +437,6 @@
                         <li><span class="category-label">海外 5%</span> 於指定國家持實體卡片或 Apple Pay 感應交易。<br><i>(含日本、韓國、泰國、新加坡、美洲、歐洲)</i></li>
                     </ul>
                 </div>
-
-                <div class="section-box">
-                    <div class="section-title">期間限定 (任務/新戶)</div>
-                    <ul class="detail-list">
-                        <li><span class="category-label">新戶 LINE Pay</span> 1/31 前申辦，核卡後至 6/30 享 LINE Pay 10% (上限 150 點/月)。</li>
-                        <li><span class="category-label">精選卡友</span> 3/31 前完成資產與扣繳任務，行動支付加碼 2.5%。</li>
-                    </ul>
-                </div>
             `
         },
         {
@@ -428,20 +444,19 @@
             name: "賴點卡",
             merchants: ["萊爾富", "海外", "保費", "LINE Pay"],
             rate: "2% / 3%",
-            note: "國內改 1%。綁 LINE Pay 享 2%。偶數日指定 7%。",
+            note: "國內改 1%。綁 LINE Pay 享 2%。海外 3% 無腦。",
             details: `
                 <div class="warning-box">
-                    <b>💡 2026 重大改惡與改良：</b><br>
-                    1. 國內實體刷卡僅剩 <span class="highlight">1%</span> (原 1.3% 已取消)。<br>
+                    <b>💡 2026 改制：</b><br>
+                    1. 國內實體刷卡降為 <span class="highlight">1%</span> (原 1.3% 已取消)。<br>
                     2. 綁定 LINE Pay 享 2% (有上限)。<br>
-                    3. 海外 3% 維持無上限 (含歐洲實體)。
+                    3. 海外 3% 維持無上限 (含歐洲實體，不限國家)。
                 </div>
 
-                <div class="section-box" style="border-color: #fcd34d; background: #fffdf0;">
-                    <div class="section-title" style="background: #fffbeb;">💰 封頂試算</div>
+                <div class="section-box calc-box">
+                    <div class="section-title calc-title">💰 封頂試算</div>
                     <ul class="detail-list">
                         <li><b>LINE Pay 一般消費 (2%)</b>：加碼 1% 上限 200 點。<br>👉 <span class="highlight">刷 NT$ 20,000 封頂</span> (超過剩 1%)。</li>
-                        <li><b>偶數日特店 (7%)</b>：加碼 5% 上限 150 點。<br>👉 <span class="highlight">刷 NT$ 3,000 封頂</span>。</li>
                         <li><b>海外消費 (3%)</b>：<span class="highlight">無上限</span> (出國神卡)。</li>
                     </ul>
                 </div>
@@ -453,14 +468,7 @@
                         <li><span class="category-label">LINE Pay</span> 2% (1% 原始 + 1% 加碼)。</li>
                         <li><span class="category-label">海外</span> 3% 無上限 (需申辦電子帳單)。</li>
                         <li><span class="category-label">保費</span> 1% 無上限 (部分壽險 1.3% 依官方公告)。</li>
-                    </ul>
-                </div>
-
-                <div class="section-box">
-                    <div class="section-title">指定加碼</div>
-                    <ul class="detail-list">
-                        <li><span class="category-label">偶數日 7%</span> 每月 2,4,6...號，於指定通路(王品/麥當勞/屈臣氏等)用 LINE Pay 享 5% 加碼。</li>
-                        <li><span class="category-label">萊爾富</span> 消費享 <span class="highlight">5% 現折</span> (需綁 LINE Pay 或聯邦卡)。</li>
+                        <li><span class="category-label">萊爾富</span> 消費享 5% 現折。</li>
                     </ul>
                 </div>
             `
@@ -472,8 +480,8 @@
             rate: "10% 點數",
             note: "電池資費 10% 無上限。GoShare 10%。",
             details: `
-                <div class="section-box" style="border-color: #fcd34d; background: #fffdf0;">
-                    <div class="section-title" style="background: #fffbeb;">💰 封頂試算</div>
+                <div class="section-box calc-box">
+                    <div class="section-title calc-title">💰 封頂試算</div>
                     <ul class="detail-list">
                         <li><b>電池資費 (10%)</b>：<span class="highlight">無上限</span>。</li>
                         <li><b>GoShare (10%)</b>：每期上限 100 點。<br>👉 <span class="highlight">刷 NT$ 1,000 封頂</span>。</li>
@@ -497,20 +505,19 @@
             rate: "3% / 10%",
             note: "權益至 2026/02/28。網購 3%，指定影音 10%。",
             details: `
-                <div class="section-box" style="border-color: #fcd34d; background: #fffdf0;">
-                    <div class="section-title" style="background: #fffbeb;">💰 封頂試算</div>
+                <div class="section-box calc-box">
+                    <div class="section-title calc-title">💰 封頂試算</div>
                     <ul class="detail-list">
-                        <li><b>網購/支付 (3%)</b>：加碼上限 150 元。<br>👉 <span class="highlight">刷 NT$ 7,500 封頂</span>。</li>
-                        <li><b>指定影音 (10%)</b>：上限 100 元。<br>👉 <span class="highlight">刷 NT$ 1,111 封頂</span>。</li>
+                        <li><b>網購/支付 (3%)</b>：加碼 2% 上限 200 元。<br>👉 <span class="highlight">刷 NT$ 10,000 封頂</span>。</li>
+                        <li><b>指定影音 (13%)</b>：加碼 13% 上限 100 元。<br>👉 <span class="highlight">刷 NT$ 770 封頂</span>。</li>
                     </ul>
                 </div>
 
                 <div class="section-box">
                     <div class="section-title">權益內容</div>
                     <ul class="detail-list">
-                        <li><span class="category-label">網購/支付</span> LINE Pay、街口、momo、蝦皮、酷澎、高鐵線上。</li>
-                        <li><span class="category-label">影音 10%</span> Netflix、Disney+、Nintendo、PlayStation。</li>
-                        <li><span class="highlight">注意：</span> 無 Spotify。</li>
+                        <li><span class="category-label">網購/支付 3%</span> LINE Pay、街口、momo、蝦皮、酷澎、高鐵線上。</li>
+                        <li><span class="category-label">影音 13%</span> Netflix、Disney+、Nintendo、PlayStation、Spotify。<br><i>(官方公告：影音加碼至 13%)</i></li>
                     </ul>
                 </div>
             `
@@ -519,23 +526,29 @@
             bank: "永豐銀行",
             name: "Daway 卡",
             merchants: ["Line Pay", "海外"],
-            rate: "新戶 6% / 舊戶 2%",
-            note: "LINE Pay 專武。新戶最高 6% (需設定扣繳)。",
+            rate: "新戶 3% / 舊戶 1%",
+            note: "新戶神卡。舊戶一般 1%，海外 2%。",
             details: `
-                <div class="section-box" style="border-color: #fcd34d; background: #fffdf0;">
-                    <div class="section-title" style="background: #fffbeb;">💰 封頂試算</div>
+                <div class="warning-box">
+                    <b>💡 2026 新舊戶差異大：</b><br>
+                    舊戶若無任務加碼，LINE Pay 回饋僅 1%。<br>
+                    建議僅「新戶」申辦使用。
+                </div>
+
+                <div class="section-box calc-box">
+                    <div class="section-title calc-title">💰 封頂試算</div>
                     <ul class="detail-list">
-                        <li><b>新戶 LINE Pay (6%)</b>：加碼上限 300 點。<br>👉 <span class="highlight">刷 NT$ 7,500 封頂</span>。</li>
-                        <li><b>舊戶 LINE Pay (2%)</b>：<span class="highlight">無上限</span>。</li>
-                        <li><b>海外消費 (2.5%)</b>：<span class="highlight">無上限</span>。</li>
+                        <li><b>新戶 LINE Pay (3%)</b>：<span class="highlight">無上限</span>。<br><i>(需設定自動扣繳)</i></li>
+                        <li><b>舊戶 LINE Pay (1%)</b>：<span class="highlight">無上限</span>。</li>
+                        <li><b>海外消費 (3% / 2%)</b>：新戶 3% 無上限；舊戶 2% 無上限。</li>
                     </ul>
                 </div>
 
                 <div class="section-box">
-                    <div class="section-title">LINE Pay 回饋</div>
+                    <div class="section-title">權益細節</div>
                     <ul class="detail-list">
-                        <li><span class="highlight">新戶 6%</span>：(基本 0.5% + 扣繳 1.5% + 新戶 4%)。</li>
-                        <li><span class="category-label">舊戶</span> 2% LINE POINTS 無上限。</li>
+                        <li><span class="category-label">新戶</span> 核卡後 12 個月內享 LINE Pay 3% 無上限。</li>
+                        <li><span class="category-label">日韓泰越</span> 實體消費登錄享加碼 (每季活動不同)。</li>
                     </ul>
                 </div>
             `
@@ -547,8 +560,8 @@
             rate: "7% / 8%",
             note: "門檻：大戶資產 > 10萬。指定通路加碼 5%。",
             details: `
-                <div class="section-box" style="border-color: #fcd34d; background: #fffdf0;">
-                    <div class="section-title" style="background: #fffbeb;">💰 封頂試算 (依等級)</div>
+                <div class="section-box calc-box">
+                    <div class="section-title calc-title">💰 封頂試算 (依等級)</div>
                     <ul class="detail-list">
                         <li><b>大戶Plus (30萬資產)</b>：<br>👉 指定通路 <span class="highlight">刷 NT$ 25,000 封頂</span>。<br>(國內最高 5% / 國外 6%)</li>
                         <li><b>大戶 (10萬資產)</b>：<br>👉 指定通路 <span class="highlight">刷 NT$ 16,000 封頂</span>。<br>(國內最高 3.5% / 國外 4.5%)</li>
@@ -576,8 +589,8 @@
                     <b>⚠️ 門檻：</b>需為「超匯等級」(外幣資產達 10 萬)。
                 </div>
 
-                <div class="section-box" style="border-color: #fcd34d; background: #fffdf0;">
-                    <div class="section-title" style="background: #fffbeb;">💰 封頂試算</div>
+                <div class="section-box calc-box">
+                    <div class="section-title calc-title">💰 封頂試算</div>
                     <ul class="detail-list">
                         <li><b>精選通路 (6%)</b>：加碼 4% 上限 300 元。<br>👉 <span class="highlight">刷 NT$ 7,500 封頂</span>。</li>
                         <li><b>國外一般消費 (2%)</b>：<span class="highlight">無上限</span>。</li>
