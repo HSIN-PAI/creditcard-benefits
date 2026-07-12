@@ -311,6 +311,206 @@ window.CARD_DATA = {
                     ]
                 }
             ]
+        },
+        {
+            bank: "中國信託",
+            name: "LINE Pay 卡",
+            tags: ["LINE Pay", "海外", "蝦皮", "淘寶", "旅遊"],
+            rate: "1% / 最高5%",
+            note: "全回饋 LINE POINTS。國內外 1% 無上限、海外實體 2.8%。電商/海外 5% 為限量登錄制。",
+            validThrough: "2026-12-31",
+            officialUrl: "https://www.ctbcbank.com/content/dam/minisite/long/creditcard/LINEPay/notice.html",
+            lastVerified: "2026-07-12",
+            warning: {
+                title: "💡 注意事項：",
+                items: [
+                    "需<span class='highlight'>綁定台灣 LINE Pay 帳號</span>；活動期間解綁或換手機型號可能喪失回饋資格。",
+                    "海外 2.8% 限<span class='highlight'>實體面對面交易</span>（實體卡/Apple Pay/Google Pay），網路交易、條碼支付不適用。",
+                    "加碼活動多為<span class='highlight'>每月/每週限量登錄制</span>（脆好購每月 6 日 10:00 開放 8,000 名；脆自遊每週二 3,000 名）。",
+                    "「脆自遊」海外 5% 只到 <span class='highlight'>9/30</span>，Q4 是否續辦未公告。點數效期 180 天。"
+                ]
+            },
+            caps: [
+                { label: "海外實體 (2.8%)", detail: "1% + 加碼 1.8%，加碼<span class='highlight'>無上限</span>（7/1–12/31）。" },
+                { label: "脆自遊海外 (5%)", detail: "再加碼 2.2%，每季上限 450 點。👉 加碼部分<span class='highlight'>刷 NT$ 20,454/季 封頂</span>（限 9/30 前，需登錄）。" },
+                { label: "脆好購電商 (5%)", detail: "淘寶/蝦皮/酷澎，加碼 4% 每季上限 100 點。👉 <span class='highlight'>刷 NT$ 2,500/季 封頂</span>（需登錄）。" },
+                { label: "國內外一般 (1%)", detail: "<span class='highlight'>無上限</span>。" }
+            ],
+            sections: [
+                {
+                    title: "其他通路",
+                    items: [
+                        { label: "旅遊平台", text: "Klook 4–10%、Hotels.com 最高 16%（優惠碼）、Expedia 8%、Trip.com/Airbnb 5%、KKday 暑期最高 18%（多需指定連結/登錄）。" },
+                        { label: "UNIQLO/GU", text: "限 JCB 卡加碼，每季上限 200 點（每月 5,000 名）。" },
+                        { label: "一卡通", text: "儲值搭大眾運輸 1% 無上限（高鐵除外）。" }
+                    ]
+                }
+            ]
+        },
+        {
+            bank: "台北富邦",
+            name: "J 卡",
+            tags: ["日本", "韓國", "泰國", "交通卡", "新戶"],
+            rate: "3% / 最高6%",
+            note: "日韓 3% 無上限。日韓泰實體加碼最高 6%、日本交通卡儲值 10%（皆至 9/30、需登錄）。無電子帳單/自扣只剩 0.5%。",
+            validThrough: "2026-12-31",
+            officialUrl: "https://www.fubon.com/banking/Personal/credit_card/all_card/omiyage/omiyage.htm",
+            lastVerified: "2026-07-12",
+            warning: {
+                title: "💡 注意事項：",
+                items: [
+                    "需申請<span class='highlight'>電子帳單或富邦帳戶自扣</span>，否則回饋降為 0.5%。排除超商、全聯、速食等。",
+                    "日韓泰加碼有<span class='highlight'>單筆滿 NT$1,000</span> 門檻（2026 新增，小額消費只有基礎 3%），且需登錄（每月 20 日 16:00 開放 2 萬名）。",
+                    "所有加碼活動只到 <span class='highlight'>9/30</span>，Q4 尚未公告。"
+                ]
+            },
+            caps: [
+                { label: "日韓泰實體 (最高6%)", detail: "日韓 3%+3%、泰國 1%+5%，加碼每季上限 NT$1,000。👉 日韓<span class='highlight'>刷 NT$ 33,333/季 封頂</span>（限 9/30 前）。" },
+                { label: "日本交通卡 (10%)", detail: "Suica/PASMO/ICOCA，限 Apple Pay 綁卡、單筆滿 NT$2,000，加碼每季上限 NT$200。👉 <span class='highlight'>儲值 NT$ 2,857/季 封頂</span>。" },
+                { label: "日韓基礎 (3%)", detail: "<span class='highlight'>無上限</span>（全年適用）。" },
+                { label: "新戶 LINE Pay (10%)", detail: "核卡 60 天內，上限 NT$500。👉 <span class='highlight'>刷 NT$ 5,556 封頂</span>（需富邦帳戶自扣）。" }
+            ],
+            sections: [
+                {
+                    title: "其他權益",
+                    items: [
+                        { label: "國內一般", text: "1%（J Points 卡回饋 LINE POINTS / J Cash 卡回饋現金）。" },
+                        { label: "伴手禮", text: "每季 1 次，領取前一週日韓消費滿 ¥10,000 或泰國 250 泰銖。" },
+                        { label: "保費", text: "0.5% 或最高 12 期 0 利率二選一。" }
+                    ]
+                }
+            ]
+        },
+        {
+            bank: "玉山銀行",
+            name: "Only 卡",
+            tags: ["等級制", "保費", "紅利", "停發"],
+            rate: "0.4% ~ 3.2%",
+            note: "⚠️ 2026/9/1 起終止發行，之後陸續換發 Unicard。2026 全年權益不變：等級制最高 3.2%，保費計入回饋與等級累積。",
+            validThrough: "2026-12-31",
+            officialUrl: "https://event.esunbank.com.tw/credit/1070615card_2/index.html",
+            lastVerified: "2026-07-12",
+            warning: {
+                title: "⚠️ 退場中：",
+                items: [
+                    "已停止申辦，<span class='highlight'>9/1 起終止發行</span>；9/1 起補發及 11 月起到期卡片將換發玉山 Unicard，換卡前照 2026 權益回饋。",
+                    "回饋改為<span class='highlight'>玉山 e point</span>（1 點折 NT$1，效期 1 年，單筆最高折 30%）。",
+                    "海外交易另收 1.5% 手續費，海外實質回饋需扣減。"
+                ]
+            },
+            caps: [
+                { label: "等級加碼", detail: "加碼上限歸戶每月 1,500 點（基礎 0.4% 無上限）。LV5 (3.2%) 👉 <span class='highlight'>刷 NT$ 53,571/月 封頂</span>；LV4 (2.4%) 刷 75,000/月；LV3 (1.6%) 刷 125,000/月。" }
+            ],
+            sections: [
+                {
+                    title: "等級門檻（年消費）",
+                    items: [
+                        { label: "LV2 0.8%", text: "年消費 NT$16,800。" },
+                        { label: "LV3 1.6%", text: "年消費 NT$168,000。" },
+                        { label: "LV4 2.4%", text: "年消費 NT$388,000。" },
+                        { label: "LV5 3.2%", text: "年消費 NT$688,000。" },
+                        { label: "特色", text: "保費計入回饋與等級累積；國內外同回饋率。免年費：電子帳單＋自動扣繳。" }
+                    ]
+                }
+            ]
+        },
+        {
+            bank: "滙豐銀行",
+            name: "Live+ 現金回饋卡",
+            tags: ["餐飲", "百貨", "娛樂", "蝦皮"],
+            rate: "3.88% ~ 5.88%",
+            note: "餐飲/購物/娛樂 3.88%，完成自扣＋精選國家餐飲最高 5.88%。⚠️ 第三方支付（LINE Pay/Apple Pay）只有 0.88%。權益公告至 9/30。",
+            validThrough: "2026-09-30",
+            officialUrl: "https://www.hsbc.com.tw/content/dam/hsbc/tw/docs/credit-cards/live-plus/cashback-cash-points-method.pdf",
+            lastVerified: "2026-07-12",
+            warning: {
+                title: "⚠️ 注意事項：",
+                items: [
+                    "限<span class='highlight'>實體卡/卡號直接結帳</span>：透過 LINE Pay、街口、Apple Pay 等支付僅 0.88%。",
+                    "餐飲<span class='highlight'>排除 foodpanda、Uber Eats</span> 外送；<span class='highlight'>歐盟 27 國+英國實體交易不回饋</span>。",
+                    "現行權益至 <span class='highlight'>9/30</span>，歷來每季展延，Q4 待公告。點數 1 點=1 元刷卡金，亦可 1 點換 2 哩。"
+                ]
+            },
+            caps: [
+                { label: "三大通路 (3.88%)", detail: "餐飲/購物/娛樂加碼 3% 每期上限 888 點。👉 <span class='highlight'>刷 NT$ 29,600 封頂</span>。" },
+                { label: "自扣任務 (+1%)", detail: "滙豐帳戶自扣，每期上限 200 點。👉 <span class='highlight'>刷 NT$ 20,000 封頂</span>。" },
+                { label: "精選國家餐飲 (+1%)", detail: "日/新/馬/越/菲/印度/斯里蘭卡當地實體餐飲，每期上限 200 點。👉 <span class='highlight'>刷 NT$ 20,000 封頂</span>。" },
+                { label: "一般消費 (0.88%)", detail: "<span class='highlight'>無上限</span>。" }
+            ],
+            sections: [
+                {
+                    title: "三大通路認定（MCC）",
+                    items: [
+                        { label: "餐飲", text: "一般餐廳、烘焙、酒吧（排除外送平台）。" },
+                        { label: "購物", text: "百貨、禮品、玩具，含蝦皮。" },
+                        { label: "娛樂", text: "電影院、遊樂園、娛樂展演。" }
+                    ]
+                }
+            ]
+        },
+        {
+            bank: "華南銀行",
+            name: "SnY 卡",
+            tags: ["紅利", "數位帳戶"],
+            rate: "約 0.6%",
+            note: "⚠️ 網購 5%、行動支付 5%、影音回饋均已移除！僅剩一般消費紅利 3 倍（約 0.6%）。網路上流傳的 5% 是過期資訊。",
+            validThrough: "2026-09-30",
+            officialUrl: "https://www.hncb.com.tw/wps/portal/HNCB/card/introduce/bonus_feedback_card/card_sny",
+            lastVerified: "2026-07-12",
+            warning: {
+                title: "⚠️ 權益已大幅縮水：",
+                items: [
+                    "網購 5%、行動支付 5%、影音（Netflix/Spotify）回饋已於 2025 年陸續<span class='highlight'>全數移除</span>。",
+                    "紅利 3 倍需當期一般消費滿 NT$1,000，且<span class='highlight'>不含網路消費</span>。",
+                    "現行活動至 <span class='highlight'>9/30</span>，Q4 未公告。辦卡限持有 SnY 數位帳戶者。"
+                ]
+            },
+            caps: [
+                { label: "紅利 3 倍 (約0.6%)", detail: "每期上限 3,000 點。👉 約<span class='highlight'>刷 NT$ 25,000 封頂</span>。" }
+            ],
+            sections: [
+                {
+                    title: "數位帳戶（主要價值所在）",
+                    items: [
+                        { label: "活存優利", text: "2.3%（10 萬內，至 2026/12/31），需當月完成任務四選一（餘額 1 萬+/美金 300+/指定電支月扣 888+）。" },
+                        { label: "新戶", text: "開戶無條件享 6 個月 2.5%（10 萬內）。" },
+                        { label: "年費", text: "1,200 元，申請電子帳單免次年年費。" }
+                    ]
+                }
+            ]
+        },
+        {
+            bank: "台灣樂天",
+            name: "Panda J 卡",
+            tags: ["日本", "韓國", "泰國", "LINE Pay", "加油"],
+            rate: "1.5% / 4%",
+            note: "日韓泰當地實體 4%、指定通路 3%（LINE Pay/街口/航空/加油/旅行社），免登錄。⚠️ 下半年加碼上限砍半。",
+            validThrough: "2026-12-31",
+            officialUrl: "https://www.card.rakuten.com.tw/corp/ads/04.xhtml",
+            lastVerified: "2026-07-12",
+            warning: {
+                title: "💡 2026 下半年變動：",
+                items: [
+                    "總回饋 % 不變，但加碼上限<span class='highlight'>由每期 500 元砍半</span>：日韓泰 300 元、指定通路 250 元。",
+                    "樂天經典卡/玫瑰金卡的消費回饋已移轉，2026 主力為本卡；玫瑰金卡僅剩日本機場貴賓室與商店折扣。",
+                    "免登錄。次年免年費需電子帳單＋年刷 12 次。"
+                ]
+            },
+            caps: [
+                { label: "日韓泰實體 (4%)", detail: "1.5% + 加碼 2.5%，每期上限 300 元。👉 <span class='highlight'>刷 NT$ 12,000 封頂</span>。" },
+                { label: "指定通路 (3%)", detail: "0.5% + 加碼 2.5%，每期上限 250 元。👉 <span class='highlight'>刷 NT$ 10,000 封頂</span>。" },
+                { label: "海外一般 (1.5%)", detail: "<span class='highlight'>無上限</span>（國內一般 0.5% 無上限）。" }
+            ],
+            sections: [
+                {
+                    title: "指定通路 3%",
+                    items: [
+                        { label: "支付", text: "LINE Pay、街口。" },
+                        { label: "交通旅遊", text: "華航/長榮/星宇、中油等 7 家加油、雄獅等 12 家旅行社。" },
+                        { label: "日本樂天", text: "日本樂天市場滿額贈 1,000 日圓券＋RGX 轉運 2% 無上限（至 12/31）。" }
+                    ]
+                }
+            ]
         }
     ]
 };

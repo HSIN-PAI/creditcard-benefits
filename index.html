@@ -84,7 +84,23 @@
             display: flex;
             flex-wrap: wrap;
             gap: 8px;
-            margin-bottom: 20px;
+            margin-bottom: 8px;
+        }
+
+        .filter-bar.collapsed {
+            max-height: 76px;
+            overflow: hidden;
+        }
+
+        .filter-toggle {
+            border: none;
+            background: none;
+            color: var(--primary-color);
+            font-size: 0.85em;
+            font-weight: 600;
+            cursor: pointer;
+            padding: 0;
+            margin-bottom: 16px;
         }
 
         .filter-chip {
@@ -405,7 +421,8 @@
 
     <input type="text" id="searchInput" class="search-box" placeholder="🔍 搜尋：LINE Pay、日本、封頂、AI...">
 
-    <div id="filterBar" class="filter-bar"></div>
+    <div id="filterBar" class="filter-bar collapsed"></div>
+    <button id="filterToggle" class="filter-toggle">顯示全部標籤 ▾</button>
 
     <div id="cardList" class="card-list"></div>
 
@@ -503,7 +520,13 @@
         return `<span class="expiry-badge expiry-ok">✅ 權益至 ${card.validThrough}</span>`;
     }
 
-    // ---------- 標籤篩選列 ----------
+    // ---------- 標籤篩選列（預設收合） ----------
+    const filterToggle = document.getElementById('filterToggle');
+    filterToggle.onclick = () => {
+        const collapsed = filterBar.classList.toggle('collapsed');
+        filterToggle.textContent = collapsed ? '顯示全部標籤 ▾' : '收合標籤 ▴';
+    };
+
     function renderFilters() {
         const tags = [...new Set(cards.flatMap(c => c.tags))];
         filterBar.innerHTML = tags.map(t =>
