@@ -42,3 +42,7 @@
 改完 push，GitHub Pages 就會更新。
 
 > 免責：資料僅供個人參考，實際回饋以各銀行官方公告為準。
+
+## 作者
+
+**Hsin Pai**（[@HSIN-PAI](https://github.com/HSIN-PAI)）
