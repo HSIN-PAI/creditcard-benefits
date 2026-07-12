@@ -8,6 +8,7 @@
 只用 Python 標準庫，不需安裝任何套件。
 """
 
+import datetime
 import hashlib
 import html.parser
 import json
@@ -105,6 +106,10 @@ def main() -> None:
         if prev is not None and prev != fp:
             changed.append((label, card["url"]))
             print("  🔔 頁面內容有異動！")
+
+    # 每次執行都更新檢查時間，確保每週至少有一個 commit。
+    # （GitHub 會停用 60 天無 commit 的 repo 的排程 workflow，這行是保活機制）
+    new_hashes["_lastChecked"] = datetime.datetime.now(datetime.timezone.utc).isoformat(timespec="seconds")
 
     HASH_FILE.parent.mkdir(exist_ok=True)
     HASH_FILE.write_text(json.dumps(new_hashes, indent=2, ensure_ascii=False), encoding="utf-8")
