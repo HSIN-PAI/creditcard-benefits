@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2026 上半年信用卡權益百科</title>
+    <title>信用卡權益百科</title>
     <style>
         :root {
-            --primary-color: #0ea5e9; /* 改用清爽的天空藍 */
+            --primary-color: #0ea5e9;
             --bg-color: #f8fafc;
             --card-bg: #ffffff;
             --text-color: #334155;
@@ -38,7 +38,7 @@
             text-align: center;
             color: #64748b;
             font-size: 0.9em;
-            margin-bottom: 25px;
+            margin-bottom: 10px;
             background: #e2e8f0;
             display: inline-block;
             padding: 4px 16px;
@@ -49,13 +49,25 @@
             font-weight: bold;
         }
 
+        .stale-banner {
+            display: none;
+            background: #fef2f2;
+            border: 1px solid #fca5a5;
+            color: #991b1b;
+            padding: 12px 16px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            font-size: 0.9em;
+            line-height: 1.5;
+        }
+
         .search-box {
             width: 100%;
             padding: 15px;
             border: 2px solid #e2e8f0;
             border-radius: 12px;
             font-size: 16px;
-            margin-bottom: 20px;
+            margin-bottom: 12px;
             box-sizing: border-box;
             background: white;
             transition: all 0.3s;
@@ -65,6 +77,31 @@
             outline: none;
             border-color: var(--primary-color);
             box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.2);
+        }
+
+        .filter-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .filter-chip {
+            border: 1px solid #cbd5e1;
+            background: white;
+            color: #475569;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+
+        .filter-chip.active {
+            background: var(--primary-color);
+            border-color: var(--primary-color);
+            color: white;
         }
 
         .card-list {
@@ -150,6 +187,19 @@
             line-height: 1.5;
         }
 
+        .expiry-badge {
+            display: inline-block;
+            font-size: 0.75em;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 10px;
+            margin-top: 8px;
+        }
+
+        .expiry-ok { background: #f0fdf4; color: #166534; }
+        .expiry-soon { background: #fffbeb; color: #92400e; }
+        .expiry-past { background: #fef2f2; color: #991b1b; }
+
         /* --- Modal 視窗 --- */
         .modal-overlay {
             display: none;
@@ -203,7 +253,7 @@
             z-index: 10;
             transition: background 0.2s;
         }
-        
+
         .close-btn:hover {
             background: #e2e8f0;
         }
@@ -222,7 +272,7 @@
             line-height: 1.7;
             color: #334155;
         }
-        
+
         .section-box {
             margin-bottom: 20px;
             border: 1px solid #e2e8f0;
@@ -294,13 +344,13 @@
             margin-bottom: 20px;
             font-size: 0.95em;
         }
-        
+
         .calc-box {
             background: #f0fdf4;
             border: 1px solid #86efac;
             color: #166534;
         }
-        
+
         .calc-title {
             background: #dcfce7 !important;
             color: #14532d !important;
@@ -311,24 +361,62 @@
             font-weight: bold;
         }
 
+        .official-link {
+            display: block;
+            text-align: center;
+            background: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            padding: 12px;
+            border-radius: 12px;
+            font-weight: 700;
+            margin-top: 10px;
+            transition: opacity 0.2s;
+        }
+
+        .official-link:hover { opacity: 0.85; }
+
+        .verify-info {
+            text-align: center;
+            font-size: 0.8em;
+            color: #94a3b8;
+            margin-top: 12px;
+        }
+
+        footer {
+            text-align: center;
+            font-size: 0.8em;
+            color: #94a3b8;
+            margin-top: 40px;
+            line-height: 1.6;
+        }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h1>💳 2026 上半年信用卡權益百科</h1>
-    <div class="subtitle">更新日期：2026/01/14</div>
-    
+    <h1 id="pageTitle">💳 信用卡權益百科</h1>
+    <div class="subtitle" id="pageSubtitle"></div>
+
+    <div id="staleBanner" class="stale-banner">
+        ⚠️ 本頁資料已超過 45 天未更新，各銀行權益可能已異動，建議先到官方頁面確認再刷。
+    </div>
+
     <input type="text" id="searchInput" class="search-box" placeholder="🔍 搜尋：LINE Pay、日本、封頂、AI...">
 
-    <div id="cardList" class="card-list">
-        <!-- 卡片列表區 -->
-    </div>
-    
+    <div id="filterBar" class="filter-bar"></div>
+
+    <div id="cardList" class="card-list"></div>
+
     <div id="emptyState" style="text-align: center; display: none; color: #94a3b8; margin-top: 30px;">
         <p style="font-size: 3em; margin-bottom: 10px;">🧐</p>
         找不到相關資訊，試試別的關鍵字？
     </div>
+
+    <footer>
+        資料僅供參考，實際回饋以各銀行官方公告為準。<br>
+        權益異動由 GitHub Actions 每週自動監測官方頁面。
+    </footer>
 </div>
 
 <!-- 彈跳視窗 -->
@@ -340,329 +428,135 @@
     </div>
 </div>
 
+<!-- 卡片資料（與程式分離，更新權益只需改 data.js） -->
+<script src="data.js"></script>
 <script>
-    // ==========================================
-    // 2026/01/14 最終修訂版 (全卡別再次查核)
-    // ==========================================
-    const myCards = [
-        {
-            bank: "國泰世華",
-            name: "CUBE 卡",
-            merchants: ["全聯", "百貨", "日本", "LINE Pay", "蝦皮", "AI"],
-            rate: "3% ~ 3.3%",
-            note: "權益自選。注意：LINE Pay 改為「領券 + 8筆任務」制。",
-            details: `
-                <div class="warning-box">
-                    <b>💡 2026 核心機制：</b><br>
-                    1. 需持有 CUBE App + (繳卡費 或 設定自動扣繳) 才享 Level 2。<br>
-                    2. <span class="highlight">LINE Pay</span>：需 App 領券 + 當月 CUBE 卡消費滿 8 筆，才享 2%。
-                </div>
+    const { meta, cards } = window.CARD_DATA;
 
-                <div class="section-box calc-box">
-                    <div class="section-title calc-title">💰 封頂試算</div>
-                    <ul class="detail-list">
-                        <li><b>五大隨選方案</b>：<span class="highlight">無上限</span>。適合大額消費、出國旅遊、買 Apple。</li>
-                        <li><b>LINE Pay (2%)</b>：加碼上限 100 點。<br>👉 <span class="highlight">刷 NT$ 5,000 封頂</span> (超過後僅剩 0.3%)。</li>
-                    </ul>
-                </div>
-
-                <div class="section-box">
-                    <div class="section-title">權益方案 (Level 2)</div>
-                    <ul class="detail-list">
-                        <li><span class="category-label">玩數位 3.3%</span> AI工具 (ChatGPT/Claude/Notion)、蝦皮、momo、酷澎、Netflix、Disney+。</li>
-                        <li><span class="category-label">趣旅行 3.3%</span> 日韓泰星實體、高鐵、Uber、Klook、Agoda。</li>
-                        <li><span class="category-label">樂饗購 3.3%</span> 全台餐飲、百貨 (SOGO/新光/遠百)、藥妝 (屈臣氏/康是美)、服飾 (Uniqlo/ZARA)。</li>
-                        <li><span class="category-label">集精選 3.0%</span> 全聯、家樂福、7-11、全家、中油直營、IKEA。</li>
-                    </ul>
-                </div>
-            `
-        },
-        {
-            bank: "台新銀行",
-            name: "@GoGo 卡",
-            merchants: ["Line Pay", "蝦皮", "momo", "酷澎", "網購"],
-            rate: "3.8%",
-            note: "行動支付/網購 3.8%。全盈Pay已移除。需 Richart 自扣。",
-            details: `
-                <div class="warning-box">
-                    <b>💡 2026 變動提醒：</b><br>
-                    1. <span class="highlight">全盈+PAY 已移除</span>回饋名單。<br>
-                    2. 需設定 <span class="highlight">Richart 帳戶自動扣繳</span> (未設定僅 0.3%)。<br>
-                    3. 每期加碼上限 1,000 點 (台新 Point)。
-                </div>
-
-                <div class="section-box calc-box">
-                    <div class="section-title calc-title">💰 封頂試算</div>
-                    <ul class="detail-list">
-                        <li><b>精選通路 (3.8%)</b>：加碼 3.5% 上限 1,000 點。<br>👉 <span class="highlight">刷 NT$ 28,571 封頂</span> (超過後剩 0.3%)。</li>
-                    </ul>
-                </div>
-
-                <div class="section-box">
-                    <div class="section-title">精選消費 3.8%</div>
-                    <ul class="detail-list">
-                        <li><span class="category-label">行動支付</span> LINE Pay、台新 Pay。</li>
-                        <li><span class="category-label">網購</span> 蝦皮、momo、酷澎 (Coupang)、PChome、Yahoo、Amazon。</li>
-                    </ul>
-                </div>
-            `
-        },
-        {
-            bank: "星展銀行",
-            name: "eco 永續卡",
-            merchants: ["日本", "歐洲", "特斯拉", "Gogoro"],
-            rate: "1% / 5% / 10%",
-            note: "權益縮水。國內 1%，日韓歐美 5% (有上限)。",
-            details: `
-                <div class="warning-box">
-                    <b>⚠️ 2026 權益縮水注意：</b><br>
-                    1. 國內/國外一般消費全面降為 <span class="highlight">1% 無上限</span>。<br>
-                    2. 綠色/海外加碼皆有上限，不再是無腦刷神卡。<br>
-                    3. GoShare 已移除 10% 回饋名單。
-                </div>
-
-                <div class="section-box calc-box">
-                    <div class="section-title calc-title">💰 封頂試算 (刷多少就不划算?)</div>
-                    <ul class="detail-list">
-                        <li><b>海外指定 (5%)</b>：加碼 4% 上限 600 點。<br>👉 <span class="highlight">刷 NT$ 15,000 封頂</span> (超過剩 1%)。<br><i>(適用：日/韓/泰/新/美/歐 實體消費)</i></li>
-                        <li><b>綠色消費 (10%)</b>：加碼 9% 上限 300 點。<br>👉 <span class="highlight">刷 NT$ 3,333 封頂</span> (超過剩 1%)。</li>
-                    </ul>
-                </div>
-
-                <div class="section-box">
-                    <div class="section-title">詳細權益</div>
-                    <ul class="detail-list">
-                        <li><span class="category-label">一般消費</span> 國內外 1% 現金積點無上限。</li>
-                        <li><span class="category-label">綠色 10%</span> Tesla 充電、Gogoro 電池資費 (含 PBGN)。</li>
-                        <li><span class="category-label">海外 5%</span> 於指定國家持實體卡片或 Apple Pay 感應交易。<br><i>(含日本、韓國、泰國、新加坡、美洲、歐洲)</i></li>
-                    </ul>
-                </div>
-            `
-        },
-        {
-            bank: "聯邦銀行",
-            name: "賴點卡",
-            merchants: ["萊爾富", "海外", "保費", "LINE Pay"],
-            rate: "2% / 3%",
-            note: "國內改 1%。綁 LINE Pay 享 2%。海外 3% 無腦。",
-            details: `
-                <div class="warning-box">
-                    <b>💡 2026 改制：</b><br>
-                    1. 國內實體刷卡降為 <span class="highlight">1%</span> (原 1.3% 已取消)。<br>
-                    2. 綁定 LINE Pay 享 2% (有上限)。<br>
-                    3. 海外 3% 維持無上限 (含歐洲實體，不限國家)。
-                </div>
-
-                <div class="section-box calc-box">
-                    <div class="section-title calc-title">💰 封頂試算</div>
-                    <ul class="detail-list">
-                        <li><b>LINE Pay 一般消費 (2%)</b>：加碼 1% 上限 200 點。<br>👉 <span class="highlight">刷 NT$ 20,000 封頂</span> (超過剩 1%)。</li>
-                        <li><b>海外消費 (3%)</b>：<span class="highlight">無上限</span> (出國神卡)。</li>
-                    </ul>
-                </div>
-
-                <div class="section-box">
-                    <div class="section-title">回饋詳情</div>
-                    <ul class="detail-list">
-                        <li><span class="category-label">國內一般</span> 1% LINE POINTS 無上限。</li>
-                        <li><span class="category-label">LINE Pay</span> 2% (1% 原始 + 1% 加碼)。</li>
-                        <li><span class="category-label">海外</span> 3% 無上限 (需申辦電子帳單)。</li>
-                        <li><span class="category-label">保費</span> 1% 無上限 (部分壽險 1.3% 依官方公告)。</li>
-                        <li><span class="category-label">萊爾富</span> 消費享 5% 現折。</li>
-                    </ul>
-                </div>
-            `
-        },
-        {
-            bank: "台新銀行",
-            name: "Gogoro Rewards",
-            merchants: ["Gogoro", "GoShare", "7-11", "全家", "高鐵"],
-            rate: "10% 點數",
-            note: "電池資費 10% 無上限。GoShare 10%。",
-            details: `
-                <div class="section-box calc-box">
-                    <div class="section-title calc-title">💰 封頂試算</div>
-                    <ul class="detail-list">
-                        <li><b>電池資費 (10%)</b>：<span class="highlight">無上限</span>。</li>
-                        <li><b>GoShare (10%)</b>：每期上限 100 點。<br>👉 <span class="highlight">刷 NT$ 1,000 封頂</span>。</li>
-                        <li><b>夥伴通路 (3%)</b>：每月上限 500 點。<br>👉 <span class="highlight">刷 NT$ 20,000 封頂</span>。<br><span style="color:red; font-size:0.9em;">⚠️ 注意：單筆回饋上限 100 點 (單筆超過 $3,333 就不划算)。</span></li>
-                    </ul>
-                </div>
-
-                <div class="section-box">
-                    <div class="section-title">Gogoro 生態系</div>
-                    <ul class="detail-list">
-                        <li><span class="category-label">電池資費</span> 10% (需綁定 Gogoro Wallet 自扣)。</li>
-                        <li><span class="category-label">夥伴通路 3%</span> 7-11、全家、高鐵、Uber、Uber Eats、foodpanda、Klook。</li>
-                    </ul>
-                </div>
-            `
-        },
-        {
-            bank: "玉山銀行",
-            name: "U Bear 卡",
-            merchants: ["網購", "行動支付", "Netflix", "Nintendo"],
-            rate: "3% / 10%",
-            note: "權益至 2026/02/28。網購 3%，指定影音 10%。",
-            details: `
-                <div class="section-box calc-box">
-                    <div class="section-title calc-title">💰 封頂試算</div>
-                    <ul class="detail-list">
-                        <li><b>網購/支付 (3%)</b>：加碼 2% 上限 200 元。<br>👉 <span class="highlight">刷 NT$ 10,000 封頂</span>。</li>
-                        <li><b>指定影音 (13%)</b>：加碼 13% 上限 100 元。<br>👉 <span class="highlight">刷 NT$ 770 封頂</span>。</li>
-                    </ul>
-                </div>
-
-                <div class="section-box">
-                    <div class="section-title">權益內容</div>
-                    <ul class="detail-list">
-                        <li><span class="category-label">網購/支付 3%</span> LINE Pay、街口、momo、蝦皮、酷澎、高鐵線上。</li>
-                        <li><span class="category-label">影音 13%</span> Netflix、Disney+、Nintendo、PlayStation、Spotify。<br><i>(官方公告：影音加碼至 13%)</i></li>
-                    </ul>
-                </div>
-            `
-        },
-        {
-            bank: "永豐銀行",
-            name: "Daway 卡",
-            merchants: ["Line Pay", "海外"],
-            rate: "新戶 3% / 舊戶 1%",
-            note: "新戶神卡。舊戶一般 1%，海外 2%。",
-            details: `
-                <div class="warning-box">
-                    <b>💡 2026 新舊戶差異大：</b><br>
-                    舊戶若無任務加碼，LINE Pay 回饋僅 1%。<br>
-                    建議僅「新戶」申辦使用。
-                </div>
-
-                <div class="section-box calc-box">
-                    <div class="section-title calc-title">💰 封頂試算</div>
-                    <ul class="detail-list">
-                        <li><b>新戶 LINE Pay (3%)</b>：<span class="highlight">無上限</span>。<br><i>(需設定自動扣繳)</i></li>
-                        <li><b>舊戶 LINE Pay (1%)</b>：<span class="highlight">無上限</span>。</li>
-                        <li><b>海外消費 (3% / 2%)</b>：新戶 3% 無上限；舊戶 2% 無上限。</li>
-                    </ul>
-                </div>
-
-                <div class="section-box">
-                    <div class="section-title">權益細節</div>
-                    <ul class="detail-list">
-                        <li><span class="category-label">新戶</span> 核卡後 12 個月內享 LINE Pay 3% 無上限。</li>
-                        <li><span class="category-label">日韓泰越</span> 實體消費登錄享加碼 (每季活動不同)。</li>
-                    </ul>
-                </div>
-            `
-        },
-        {
-            bank: "永豐銀行",
-            name: "DAWHO 大戶卡",
-            merchants: ["旅遊", "外送", "電影", "Netflix", "Xbox"],
-            rate: "7% / 8%",
-            note: "門檻：大戶資產 > 10萬。指定通路加碼 5%。",
-            details: `
-                <div class="section-box calc-box">
-                    <div class="section-title calc-title">💰 封頂試算 (依等級)</div>
-                    <ul class="detail-list">
-                        <li><b>大戶Plus (30萬資產)</b>：<br>👉 指定通路 <span class="highlight">刷 NT$ 25,000 封頂</span>。<br>(國內最高 5% / 國外 6%)</li>
-                        <li><b>大戶 (10萬資產)</b>：<br>👉 指定通路 <span class="highlight">刷 NT$ 16,000 封頂</span>。<br>(國內最高 3.5% / 國外 4.5%)</li>
-                    </ul>
-                </div>
-
-                <div class="section-box">
-                    <div class="section-title">七大指定通路 <span>(等級加碼)</span></div>
-                    <ul class="detail-list">
-                        <li><span class="category-label">樂</span> 旅行社、航空、飯店、Netflix、PlayStation、XBOX。</li>
-                        <li><span class="category-label">食</span> foodpanda、Uber Eats。</li>
-                        <li><span class="category-label">行</span> 電影院、兩廳院購票。</li>
-                    </ul>
-                </div>
-            `
-        },
-        {
-            bank: "永豐銀行",
-            name: "幣倍卡",
-            merchants: ["海外", "亞馬遜", "日韓泰越"],
-            rate: "最高 6%",
-            note: "門檻：外幣資產等值台幣 10 萬 (超匯)。國外基礎 2%。",
-            details: `
-                <div class="warning-box">
-                    <b>⚠️ 門檻：</b>需為「超匯等級」(外幣資產達 10 萬)。
-                </div>
-
-                <div class="section-box calc-box">
-                    <div class="section-title calc-title">💰 封頂試算</div>
-                    <ul class="detail-list">
-                        <li><b>精選通路 (6%)</b>：加碼 4% 上限 300 元。<br>👉 <span class="highlight">刷 NT$ 7,500 封頂</span>。</li>
-                        <li><b>國外一般消費 (2%)</b>：<span class="highlight">無上限</span>。</li>
-                    </ul>
-                </div>
-
-                <div class="section-box">
-                    <div class="section-title">回饋細節</div>
-                    <ul class="detail-list">
-                        <li><span class="category-label">精選通路 6%</span> 海外實體商店、Amazon、iHerb。<br><i>(計算：國外 2% + 精選加碼 4% = 6%)</i></li>
-                        <li><span class="category-label">一般消費</span> 國外 2% 無上限 (需超匯等級)。</li>
-                    </ul>
-                </div>
-            `
-        }
-    ];
-
-    // ==========================================
-    // 程式邏輯區
-    // ==========================================
     const cardListEl = document.getElementById('cardList');
     const searchInput = document.getElementById('searchInput');
     const emptyState = document.getElementById('emptyState');
     const modalOverlay = document.getElementById('modalOverlay');
     const modalTitle = document.getElementById('modalTitle');
     const modalBody = document.getElementById('modalBody');
+    const filterBar = document.getElementById('filterBar');
 
+    let activeFilter = null;
+
+    // ---------- 頁首與資料過期警示 ----------
+    document.getElementById('pageTitle').textContent = `💳 ${meta.title}`;
+    document.title = meta.title;
+    document.getElementById('pageSubtitle').textContent =
+        `適用期間 ${meta.period}｜更新日期 ${meta.updated}`;
+
+    const daysSinceUpdate = (Date.now() - new Date(meta.updated)) / 86400000;
+    if (daysSinceUpdate > 45) {
+        document.getElementById('staleBanner').style.display = 'block';
+    }
+
+    // ---------- 從結構化資料組出詳細內容 HTML ----------
+    function buildDetails(card) {
+        let html = '';
+
+        if (card.warning) {
+            html += `<div class="warning-box"><b>${card.warning.title}</b><br>` +
+                card.warning.items.map((t, i) => `${i + 1}. ${t}`).join('<br>') +
+                `</div>`;
+        }
+
+        if (card.caps && card.caps.length) {
+            html += `<div class="section-box calc-box">
+                <div class="section-title calc-title">💰 封頂試算</div>
+                <ul class="detail-list">` +
+                card.caps.map(c => `<li><b>${c.label}</b>：${c.detail}</li>`).join('') +
+                `</ul></div>`;
+        }
+
+        (card.sections || []).forEach(sec => {
+            html += `<div class="section-box">
+                <div class="section-title">${sec.title}${sec.badge ? `<span>${sec.badge}</span>` : ''}</div>
+                <ul class="detail-list">` +
+                sec.items.map(it =>
+                    `<li>${it.label ? `<span class="category-label">${it.label}</span> ` : ''}${it.text}</li>`
+                ).join('') +
+                `</ul></div>`;
+        });
+
+        if (card.officialUrl) {
+            html += `<a class="official-link" href="${card.officialUrl}" target="_blank" rel="noopener">🔗 前往官方權益頁面查證</a>`;
+        }
+        if (card.lastVerified) {
+            html += `<div class="verify-info">本卡資料查證日期：${card.lastVerified}</div>`;
+        }
+
+        return html;
+    }
+
+    // ---------- 權益到期標示 ----------
+    function expiryBadge(card) {
+        if (!card.validThrough) return '';
+        const days = Math.ceil((new Date(card.validThrough) - Date.now()) / 86400000);
+        if (days < 0) return `<span class="expiry-badge expiry-past">⛔ 權益已於 ${card.validThrough} 到期</span>`;
+        if (days <= 45) return `<span class="expiry-badge expiry-soon">⏳ 權益至 ${card.validThrough}（剩 ${days} 天）</span>`;
+        return `<span class="expiry-badge expiry-ok">✅ 權益至 ${card.validThrough}</span>`;
+    }
+
+    // ---------- 標籤篩選列 ----------
+    function renderFilters() {
+        const tags = [...new Set(cards.flatMap(c => c.tags))];
+        filterBar.innerHTML = tags.map(t =>
+            `<button class="filter-chip" data-tag="${t}">#${t}</button>`
+        ).join('');
+        filterBar.querySelectorAll('.filter-chip').forEach(btn => {
+            btn.onclick = () => {
+                activeFilter = activeFilter === btn.dataset.tag ? null : btn.dataset.tag;
+                filterBar.querySelectorAll('.filter-chip').forEach(b =>
+                    b.classList.toggle('active', b.dataset.tag === activeFilter));
+                renderCards(searchInput.value);
+            };
+        });
+    }
+
+    // ---------- 卡片列表 ----------
     function renderCards(filterText = '') {
         cardListEl.innerHTML = '';
         const searchStr = filterText.toLowerCase();
 
-        const filteredData = myCards.filter(card => {
+        const filteredData = cards.filter(card => {
+            if (activeFilter && !card.tags.includes(activeFilter)) return false;
             const contentToSearch = [
-                card.name, 
-                card.bank, 
-                ...card.merchants, 
-                card.note,
-                card.details || '' 
+                card.name, card.bank, ...card.tags, card.note, buildDetails(card)
             ].join(' ').toLowerCase();
             return contentToSearch.includes(searchStr);
         });
 
-        if (filteredData.length === 0) {
-            emptyState.style.display = 'block';
-        } else {
-            emptyState.style.display = 'none';
-        }
+        emptyState.style.display = filteredData.length === 0 ? 'block' : 'none';
 
         filteredData.forEach(card => {
             const div = document.createElement('div');
             div.className = 'credit-card';
             div.onclick = () => openModal(card);
 
-            const merchantsHtml = card.merchants.map(m => `<span class="merchant-tag">#${m}</span>`).join('');
-            
+            const tagsHtml = card.tags.map(m => `<span class="merchant-tag">#${m}</span>`).join('');
+
             div.innerHTML = `
                 <div class="card-header">
                     <div class="card-name">${card.bank} ${card.name}</div>
                     <div class="reward-rate">${card.rate}</div>
                 </div>
-                <div>${merchantsHtml}</div>
+                <div>${tagsHtml}</div>
                 <div class="note">${card.note}</div>
+                ${expiryBadge(card)}
                 <div class="click-hint">點擊查看封頂試算與詳細通路 💰</div>
             `;
-            
+
             cardListEl.appendChild(div);
         });
     }
 
-    function openModal(cardData) {
-        modalTitle.innerText = `${cardData.bank} ${cardData.name}`;
-        modalBody.innerHTML = cardData.details || '<p>無詳細資訊</p>';
+    function openModal(card) {
+        modalTitle.innerText = `${card.bank} ${card.name}`;
+        modalBody.innerHTML = buildDetails(card) || '<p>無詳細資訊</p>';
         modalOverlay.style.display = 'flex';
         document.body.style.overflow = 'hidden';
     }
@@ -676,10 +570,13 @@
         if (e.target === modalOverlay) closeModal();
     });
 
-    searchInput.addEventListener('input', (e) => {
-        renderCards(e.target.value);
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeModal();
     });
 
+    searchInput.addEventListener('input', (e) => renderCards(e.target.value));
+
+    renderFilters();
     renderCards();
 </script>
 

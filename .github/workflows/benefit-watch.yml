@@ -1,0 +1,39 @@
+name: 權益頁面異動監測
+
+on:
+  schedule:
+    # 每週一 09:00 (台灣時間, UTC+8) 檢查一次
+    - cron: "0 1 * * 1"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  watch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: 檢查各銀行權益頁面
+        run: python3 scripts/check_benefit_pages.py
+
+      - name: 有異動時開 Issue 提醒
+        if: hashFiles('.watch/changes.md') != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TITLE="🔔 信用卡權益頁面異動偵測 ($(TZ=Asia/Taipei date +%Y-%m-%d))"
+          gh issue create --title "$TITLE" --body-file .watch/changes.md --repo "$GITHUB_REPOSITORY"
+
+      - name: 更新雜湊紀錄
+        run: |
+          git config user.name "benefit-watch-bot"
+          git config user.email "actions@github.com"
+          rm -f .watch/changes.md
+          git add .watch/hashes.json
+          if ! git diff --cached --quiet; then
+            git commit -m "chore: 更新權益頁面監測紀錄 [skip ci]"
+            git push
+          fi
