@@ -132,6 +132,11 @@ ok(snyGeneral && snyGeneral.rule.rate === 0.6, "一般消費含華南 SnY 0.6%")
 r = recommend("網購 2000");
 const ubearOnline = r.results.find(x => x.card.id === "ubear");
 ok(ubearOnline && ubearOnline.rule.rate === 3, "分類查詢「網購」→ U Bear 3% 匹配");
+r = recommend("queen shop 1000");
+ok(!r.channelUnknown && r.channel.id === "queenshop", "queen shop → 通路字典有收錄");
+const qsUbear = r.results.find(x => x.card.id === "ubear");
+ok(qsUbear && qsUbear.rule.rate === 3, "Queen Shop 吃到 U Bear 網購 3%");
+ok(!r.results.find(x => x.card.id === "sny"), "Queen Shop 屬網路消費,華南 SnY 被排除");
 
 // ---- U Bear 到期測試（8/31 後應消失）：改不了系統時間，驗證 validThrough 邏輯即可 ----
 console.log("\n== 有效期 ==");

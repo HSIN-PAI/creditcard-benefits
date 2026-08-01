@@ -77,6 +77,7 @@
         { id: "iherb",     name: "iHerb",       aliases: ["iherb"], cats: ["online", "crossborder"] },
         { id: "shein",     name: "SHEIN",       aliases: ["shein"], cats: ["online", "crossborder"] },
         { id: "rakutenjp", name: "日本樂天",    aliases: ["日本樂天", "樂天市場", "rakuten"], cats: ["online", "crossborder"] },
+        { id: "queenshop", name: "Queen Shop", aliases: ["queen shop", "queenshop", "qs官網"], cats: ["online"] },
         // 訂閱 / 串流 / AI
         { id: "netflix",   name: "Netflix",     aliases: ["netflix", "網飛"], cats: ["subscription", "streaming"] },
         { id: "disney",    name: "Disney+",     aliases: ["disney+", "disney plus", "disneyplus"], cats: ["subscription", "streaming"] },
