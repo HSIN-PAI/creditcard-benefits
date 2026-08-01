@@ -407,6 +407,172 @@
             margin-top: 40px;
             line-height: 1.6;
         }
+
+        /* --- 這筆刷哪張（推薦引擎） --- */
+        .reco-box {
+            background: linear-gradient(135deg, #0f172a, #1e3a5f);
+            border-radius: 16px;
+            padding: 18px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.15);
+        }
+
+        .reco-title {
+            color: #ffffff;
+            font-weight: 800;
+            font-size: 1.1em;
+            margin-bottom: 10px;
+        }
+
+        .reco-input {
+            margin-bottom: 10px;
+            border: none;
+        }
+
+        .reco-examples {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .example-chip {
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.1);
+            color: #e2e8f0;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            cursor: pointer;
+        }
+
+        .example-chip:active { background: rgba(255, 255, 255, 0.25); }
+
+        .reco-header {
+            color: #bae6fd;
+            font-size: 0.9em;
+            font-weight: 600;
+            margin: 14px 0 8px;
+        }
+
+        .reco-warn {
+            color: #fcd34d;
+            font-size: 0.8em;
+            margin-bottom: 8px;
+        }
+
+        .reco-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 12px;
+            margin-bottom: 8px;
+            cursor: pointer;
+        }
+
+        .reco-item.best { border: 2px solid #fbbf24; }
+
+        .reco-rank { font-size: 1.3em; line-height: 1.2; }
+
+        .reco-main { flex: 1; min-width: 0; }
+
+        .reco-card-name {
+            font-weight: 800;
+            color: #0f172a;
+            font-size: 0.95em;
+        }
+
+        .reco-plan {
+            background: #e0f2fe;
+            color: #0369a1;
+            font-size: 0.75em;
+            font-weight: 700;
+            padding: 1px 8px;
+            border-radius: 10px;
+            margin-left: 4px;
+            white-space: nowrap;
+        }
+
+        .reco-chips { margin-top: 4px; }
+
+        .cond-chip {
+            display: inline-block;
+            background: #fef3c7;
+            color: #92400e;
+            font-size: 0.72em;
+            font-weight: 700;
+            padding: 1px 7px;
+            border-radius: 8px;
+            margin: 2px 3px 0 0;
+        }
+
+        .reco-cap, .reco-valid {
+            font-size: 0.78em;
+            color: #64748b;
+            margin-top: 4px;
+            line-height: 1.4;
+        }
+
+        .reco-cap.over { color: #dc2626; font-weight: 600; }
+
+        .reco-cond {
+            margin-top: 4px;
+            font-size: 0.78em;
+            color: #64748b;
+        }
+
+        .reco-cond summary {
+            cursor: pointer;
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .reco-cond ul { margin: 4px 0 0; padding-left: 18px; }
+
+        .reco-reward {
+            text-align: right;
+            white-space: nowrap;
+        }
+
+        .reco-reward b {
+            display: block;
+            color: #16a34a;
+            font-size: 1.15em;
+        }
+
+        .reco-reward span {
+            font-size: 0.78em;
+            color: #64748b;
+        }
+
+        .reco-reward .unit {
+            display: block;
+            font-size: 0.68em;
+            color: #94a3b8;
+        }
+
+        .reco-more summary {
+            color: #bae6fd;
+            font-size: 0.85em;
+            font-weight: 600;
+            cursor: pointer;
+            margin: 4px 0 8px;
+        }
+
+        .reco-excluded {
+            color: #cbd5e1;
+            font-size: 0.78em;
+            margin-top: 6px;
+            line-height: 1.5;
+        }
+
+        .reco-note {
+            color: #94a3b8;
+            font-size: 0.72em;
+            margin-top: 10px;
+            line-height: 1.5;
+        }
     </style>
 </head>
 <body>
@@ -417,6 +583,22 @@
 
     <div id="staleBanner" class="stale-banner">
         ⚠️ 本頁資料已超過 45 天未更新，各銀行權益可能已異動，建議先到官方頁面確認再刷。
+    </div>
+
+    <!-- 這筆刷哪張（推薦引擎） -->
+    <div class="reco-box">
+        <div class="reco-title">💡 這筆刷哪張？</div>
+        <input type="text" id="recoInput" class="search-box reco-input" placeholder="輸入通路＋金額，例：全聯 1200" autocomplete="off">
+        <div class="reco-examples" id="recoExamples">
+            <button class="example-chip">全聯 1200</button>
+            <button class="example-chip">蝦皮 800</button>
+            <button class="example-chip">日本 5000</button>
+            <button class="example-chip">超商 100</button>
+            <button class="example-chip">line pay 500</button>
+            <button class="example-chip">chatgpt 660</button>
+        </div>
+        <div id="recoResult"></div>
+        <div class="reco-note" id="recoNote" style="display:none"></div>
     </div>
 
     <input type="text" id="searchInput" class="search-box" placeholder="🔍 搜尋：LINE Pay、日本、封頂、AI...">
@@ -449,6 +631,9 @@
 
 <!-- 卡片資料（與程式分離，更新權益只需改 data.js） -->
 <script src="data.js"></script>
+<!-- 推薦引擎：規則資料 + 計算邏輯 -->
+<script src="rules.js"></script>
+<script src="engine.js"></script>
 <script>
     const { meta, cards } = window.CARD_DATA;
 
@@ -603,6 +788,137 @@
 
     renderFilters();
     renderCards();
+
+    // ---------- 這筆刷哪張（推薦引擎） ----------
+    const recoInput = document.getElementById('recoInput');
+    const recoResult = document.getElementById('recoResult');
+    const recoNote = document.getElementById('recoNote');
+
+    // 推薦結果對回 data.js 的卡片，點擊可開詳細頁
+    function findDataCard(recoCard) {
+        return cards.find(c => c.bank === recoCard.bank && c.name === recoCard.name);
+    }
+
+    function fmtMoney(n) {
+        return 'NT$' + Math.round(n).toLocaleString('zh-TW');
+    }
+
+    function daysTo(dateStr) {
+        return Math.ceil((new Date(dateStr) - Date.now()) / 86400000);
+    }
+
+    function renderRecoItem(item, rank) {
+        const { card, rule, reward, effRate, capped, headroom } = item;
+        const medals = ['🥇', '🥈', '🥉'];
+        const medal = rank < 3 ? medals[rank] : `<span style="font-size:0.8em;color:#94a3b8">${rank + 1}</span>`;
+
+        const chips = (rule.conditions || [])
+            .map(c => `<span class="cond-chip">${c.tag}</span>`).join('');
+
+        let capLine = '';
+        if (rule.cap && rule.cap.spend) {
+            if (capped) {
+                capLine = `<div class="reco-cap over">⚠️ 超過封頂（${rule.cap.period}上限刷 ${fmtMoney(rule.cap.spend)}），超出部分以 ${rule.base || 0}% 計</div>`;
+            } else {
+                const headroomText = rule.cap.perTx
+                    ? `單筆 ${fmtMoney(rule.cap.spend)} 內加碼`
+                    : `這筆後約剩 ${fmtMoney(headroom)}（以當${rule.cap.period}未刷過計）`;
+                capLine = `<div class="reco-cap">封頂：每${rule.cap.period}加碼刷 ${fmtMoney(rule.cap.spend)}，${headroomText}</div>`;
+            }
+        }
+
+        let validLine = '';
+        if (rule.validThrough) {
+            const d = daysTo(rule.validThrough);
+            if (d <= 75) validLine = `<div class="reco-valid">⏳ 此權益至 ${rule.validThrough}（剩 ${d} 天）</div>`;
+        }
+
+        const condDetails = (rule.conditions || []).length
+            ? `<details class="reco-cond" onclick="event.stopPropagation()"><summary>條件說明（${rule.conditions.length} 項）</summary><ul>` +
+              rule.conditions.map(c => `<li><b>${c.tag}</b>：${c.text}</li>`).join('') +
+              `</ul></details>`
+            : '';
+
+        return `
+            <div class="reco-item ${rank === 0 ? 'best' : ''}" data-cardid="${card.id}">
+                <div class="reco-rank">${medal}</div>
+                <div class="reco-main">
+                    <div class="reco-card-name">${card.bank} ${card.name}<span class="reco-plan">${rule.title}</span></div>
+                    <div class="reco-chips">${chips}</div>
+                    ${capLine}
+                    ${validLine}
+                    ${condDetails}
+                </div>
+                <div class="reco-reward">
+                    <b>${fmtMoney(reward)}</b>
+                    <span>實質 ${effRate.toFixed(2)}%</span>
+                    <span class="unit">${card.unit}</span>
+                </div>
+            </div>`;
+    }
+
+    function renderReco(text) {
+        if (!text.trim()) {
+            recoResult.innerHTML = '';
+            recoNote.style.display = 'none';
+            return;
+        }
+        const r = window.RECO.recommend(text);
+        if (r.error || !r.results.length) {
+            recoResult.innerHTML = `<div class="reco-warn">找不到適用權益，換個關鍵字試試？</div>`;
+            recoNote.style.display = 'none';
+            return;
+        }
+
+        let html = `<div class="reco-header">在「${r.channel.name}」刷 ${fmtMoney(r.amount)} 的最佳選擇：</div>`;
+        if (r.channelUnknown) {
+            html += `<div class="reco-warn">⚠️ 通路字典查無「${r.channel.name}」，以各卡「一般消費」回饋試算。</div>`;
+        }
+        if (r.amountAssumed) {
+            html += `<div class="reco-warn">未輸入金額，以 NT$1,000 試算。</div>`;
+        }
+
+        const top3 = r.results.slice(0, 3);
+        const rest = r.results.slice(3);
+        html += top3.map((item, i) => renderRecoItem(item, i)).join('');
+        if (rest.length) {
+            html += `<details class="reco-more"><summary>其他 ${rest.length} 張卡 ▾</summary>` +
+                rest.map((item, i) => renderRecoItem(item, i + 3)).join('') +
+                `</details>`;
+        }
+        if (r.excluded.length) {
+            html += `<div class="reco-excluded">` +
+                r.excluded.map(e => {
+                    const reason = (e.rule.conditions || []).map(c => c.text).find(t => t.includes('排除')) || '此通路在排除清單';
+                    return `🚫 ${e.card.bank} ${e.card.name}：${reason}`;
+                }).join('<br>') + `</div>`;
+        }
+        recoResult.innerHTML = html;
+
+        recoNote.textContent = `${r.settingsText}。封頂餘裕以當期未刷過計，領券/登錄請依條件標籤自行確認。`;
+        recoNote.style.display = 'block';
+
+        recoResult.querySelectorAll('.reco-item').forEach(el => {
+            el.onclick = () => {
+                const recoCard = window.CARD_RULES.cards.find(c => c.id === el.dataset.cardid);
+                const dataCard = recoCard && findDataCard(recoCard);
+                if (dataCard) openModal(dataCard);
+            };
+        });
+    }
+
+    let recoTimer = null;
+    recoInput.addEventListener('input', (e) => {
+        clearTimeout(recoTimer);
+        recoTimer = setTimeout(() => renderReco(e.target.value), 150);
+    });
+
+    document.getElementById('recoExamples').querySelectorAll('.example-chip').forEach(btn => {
+        btn.onclick = () => {
+            recoInput.value = btn.textContent;
+            renderReco(btn.textContent);
+        };
+    });
 </script>
 
 </body>
