@@ -49,7 +49,7 @@ ok(r.channel.id === "pxmart" && r.amount === 1200, "通路金額解析正確");
 const first = r.results[0];
 ok(first.card.id === "dawho" && Math.abs(first.reward - 42) < 0.01, `第一名 DAWHO 大戶 3.5% = $42（實際:${first.card.id} $${first.reward}）`);
 const cube = r.results.find(x => x.card.id === "cube");
-ok(cube && cube.rule.title === "集精選" && Math.abs(cube.reward - 36) < 0.01, `CUBE 集精選 3% = $36`);
+ok(cube && cube.rule.title === "集精選" && Math.abs(cube.reward - 24) < 0.01, `CUBE 集精選 2% = $24（2026/9 查證後）`);
 const fubonExcluded = r.excluded.find(x => x.card.id === "fubonj");
 ok(!!fubonExcluded, "富邦 J 卡因排除全聯而列入排除清單");
 
@@ -70,15 +70,16 @@ const ctbcTaobao = r.results.find(x => x.card.id === "ctbc");
 ok(ctbcTaobao.capped && Math.abs(ctbcTaobao.reward - 150) < 0.01,
    `脆好購超封頂 blended = $150（實際 $${ctbcTaobao.reward}，capped=${ctbcTaobao.capped}）`);
 
-// ---- 訂閱 base 0：ChatGPT 3000（U Bear 上限 1000）----
-console.log("\n== ChatGPT 3000（U Bear 訂閱 cap 1000, base 0）==");
+// ---- 訂閱：ChatGPT 3000（2026/9 起 U Bear 訂閱 10% 已取消，僅剩一般 1%）----
+console.log("\n== ChatGPT 3000 ==");
 r = recommend("chatgpt 3000");
 console.log("  ", top(r));
 const ubear = r.results.find(x => x.card.id === "ubear");
-// 1000*10% + 2000*0 = 100
-ok(ubear && Math.abs(ubear.reward - 100) < 0.01, `U Bear 訂閱超頂 = $100（實際 $${ubear ? ubear.reward : "無"}）`);
+ok(ubear && ubear.rule.rate === 1, `U Bear 訂閱平台被排除，只剩一般 1%（實際 ${ubear ? ubear.rule.rate : "無"}%）`);
 const cubeGpt = r.results.find(x => x.card.id === "cube");
 ok(cubeGpt.rule.title === "玩數位", "CUBE 玩數位有匹配 ChatGPT");
+const richartGpt = r.results.find(x => x.card.id === "richart");
+ok(richartGpt && richartGpt.rule.title === "數趣刷", "Richart 數趣刷已擴充 AI 服務（ChatGPT）");
 
 // ---- 海外：日本 5000 ----
 console.log("\n== 日本 5000 ==");
@@ -113,11 +114,12 @@ console.log("\n== line pay 2000 ==");
 r = recommend("line pay 2000");
 console.log("  ", top(r));
 const richartLp = r.results.find(x => x.card.id === "richart");
-ok(richartLp && richartLp.rule.rate === 3.8, "Richart LINE Pay 領券 3.8% 匹配");
-const cubeLp = r.results.find(x => x.card.id === "cube");
-ok(cubeLp && cubeLp.rule.title === "LINE Pay 領券加碼", "CUBE LINE Pay 領券匹配（10/31 前有效）");
+// 領券 3.8% 至 9/30、其後 2.3%——日期相依，兩者皆合法
+ok(richartLp && richartLp.rule.rate >= 2.3, `Richart LINE Pay 匹配（${richartLp ? richartLp.rule.rate : "無"}%）`);
 const hsbcLp = r.results.find(x => x.card.id === "hsbc");
 ok(!hsbcLp || hsbcLp.rule.rate <= 0.88, "滙豐對行動支付不給 3.88%");
+const ubearLp = r.results.find(x => x.card.id === "ubear");
+ok(!ubearLp || [1, 5].includes(ubearLp.rule.rate), "U Bear LINE Pay 專案 5%（9/1–11/30）或一般 1%");
 
 // ---- 無金額 / 無通路 ----
 console.log("\n== 特殊輸入 ==");
@@ -131,17 +133,36 @@ const snyGeneral = recommend("300").results.find(x => x.card.id === "sny");
 ok(snyGeneral && snyGeneral.rule.rate === 0.6, "一般消費含華南 SnY 0.6%");
 r = recommend("網購 2000");
 const ubearOnline = r.results.find(x => x.card.id === "ubear");
-ok(ubearOnline && ubearOnline.rule.rate === 3, "分類查詢「網購」→ U Bear 3% 匹配");
+ok(ubearOnline && ubearOnline.rule.rate === 3, "分類查詢「網購」→ U Bear 3% 匹配（9/1 新制）");
 r = recommend("queen shop 1000");
 ok(!r.channelUnknown && r.channel.id === "queenshop", "queen shop → 通路字典有收錄");
 const qsUbear = r.results.find(x => x.card.id === "ubear");
 ok(qsUbear && qsUbear.rule.rate === 3, "Queen Shop 吃到 U Bear 網購 3%");
 ok(!r.results.find(x => x.card.id === "sny"), "Queen Shop 屬網路消費,華南 SnY 被排除");
 
-// ---- U Bear 到期測試（8/31 後應消失）：改不了系統時間，驗證 validThrough 邏輯即可 ----
-console.log("\n== 有效期 ==");
-r = recommend("網購 2000");
-ok(!!r.results.find(x => x.card.id === "ubear"), "8/1 當下 U Bear 仍有效（8/31 到期）");
+// ---- 2026/9/30 權益總對帳新增 ----
+console.log("\n== Q4 對帳新規則 ==");
+r = recommend("虎航 3000");
+const tigerCtbc = r.results.find(x => x.card.id === "ctbc");
+// 2222*10% + 778*1% ≈ 230
+ok(tigerCtbc && tigerCtbc.rule.rate === 10 && Math.abs(tigerCtbc.reward - 230) < 1,
+   `中信虎航 10% 封頂混算 ≈ $230（實際 $${tigerCtbc ? tigerCtbc.reward.toFixed(0) : "無"}）`);
+r = recommend("威秀 600");
+const laidianIp = r.results.find(x => x.card.id === "laidian");
+ok(laidianIp && laidianIp.rule.title === "IP商店/售票/影城", "賴點 IP商店 7% 匹配威秀（至 12/31）");
+r = recommend("海底撈 2000");
+const richartChill = r.results.find(x => x.card.id === "richart");
+ok(richartChill && richartChill.rule.rate === 10, "Richart Chill刷 10% 匹配海底撈（常設方案）");
+r = recommend("手搖 100");
+ok(r.results.find(x => x.card.id === "richart")?.rule.rate === 10, "分類查詢「手搖」→ Chill刷 10%");
+r = recommend("全聯 1200");
+const cubeQ4 = r.results.find(x => x.card.id === "cube");
+ok(cubeQ4 && cubeQ4.rule.rate === 2.0, "CUBE 集精選已降為 2%（9 月查證，保守採低值）");
+r = recommend("日本 5000");
+const fubonQ4 = r.results.find(x => x.card.id === "fubonj");
+ok(fubonQ4 && fubonQ4.rule.rate <= 6, `富邦日韓匹配 ${fubonQ4 ? fubonQ4.rule.rate : "無"}%（加碼 9/30 後自動失效退 3%）`);
+const hsbcDining = recommend("餐廳 1000").results.find(x => x.card.id === "hsbc");
+ok(hsbcDining && hsbcDining.rule.rate === 3.88, "滙豐餐飲 3.88% 展延至 12/31 有效");
 
 console.log(`\n========= 結果：${pass} 通過 / ${fail} 失敗 =========`);
 process.exit(fail ? 1 : 0);

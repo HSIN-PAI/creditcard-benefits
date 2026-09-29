@@ -53,6 +53,12 @@
         { id: "mcd",       name: "麥當勞",      aliases: ["麥當勞", "mcdonald", "mcdonalds"], cats: ["dining", "fastfood"] },
         { id: "starbucks", name: "星巴克",      aliases: ["星巴克", "starbucks"], cats: ["dining"] },
         { id: "wowprime",  name: "王品",        aliases: ["王品", "wowprime"], cats: ["dining"] },
+        { id: "haidilao",  name: "海底撈",      aliases: ["海底撈", "haidilao"], cats: ["dining", "hotpot"] },
+        { id: "wooma",     name: "屋馬燒肉",    aliases: ["屋馬", "屋馬燒肉"], cats: ["dining"] },
+        { id: "cha6",      name: "茶六燒肉",    aliases: ["茶六", "茶六燒肉"], cats: ["dining"] },
+        { id: "jhanji",    name: "詹記麻辣鍋",  aliases: ["詹記", "詹記麻辣鍋"], cats: ["dining", "hotpot"] },
+        { id: "50lan",     name: "50嵐",        aliases: ["50嵐", "五十嵐", "50藍"], cats: ["handshake"] },
+        { id: "dejheng",   name: "得正",        aliases: ["得正", "dejheng"], cats: ["handshake"] },
         { id: "ubereats",  name: "Uber Eats",   aliases: ["ubereats", "uber eats", "優食"], cats: ["delivery"] },
         { id: "foodpanda", name: "foodpanda",   aliases: ["foodpanda", "熊貓外送", "富胖達"], cats: ["delivery"] },
         // 藥妝
@@ -64,6 +70,15 @@
         { id: "eslite",    name: "誠品",        aliases: ["誠品", "eslite"], cats: ["dept"] },
         { id: "ikea",      name: "IKEA",        aliases: ["ikea", "宜家"], cats: ["shopping"] },
         { id: "nike",      name: "NIKE",        aliases: ["nike"], cats: ["shopping"] },
+        { id: "poya",      name: "寶雅",        aliases: ["寶雅", "poya"], cats: ["drugstore", "shopping"] },
+        { id: "decathlon", name: "迪卡儂",      aliases: ["迪卡儂", "decathlon"], cats: ["shopping"] },
+        // 影城 / 售票
+        { id: "vieshow",   name: "威秀影城",    aliases: ["威秀", "vieshow", "威秀影城"], cats: ["cinema"] },
+        { id: "showtimes", name: "秀泰影城",    aliases: ["秀泰", "showtimes", "秀泰影城"], cats: ["cinema"] },
+        { id: "opentix",   name: "OPENTIX",     aliases: ["opentix", "兩廳院售票"], cats: ["ticketing"] },
+        { id: "tixcraft",  name: "拓元售票",    aliases: ["拓元", "tixcraft"], cats: ["ticketing"] },
+        { id: "kktix",     name: "KKTIX",       aliases: ["kktix"], cats: ["ticketing"] },
+        { id: "kham",      name: "寬宏售票",    aliases: ["寬宏", "kham"], cats: ["ticketing"] },
         // 加油
         { id: "cpc",       name: "中油",        aliases: ["中油", "cpc", "中油直營"], cats: ["gas"] },
         // 網購電商
@@ -109,6 +124,7 @@
         { id: "trip",      name: "Trip.com",    aliases: ["trip.com", "攜程"], cats: ["travel"] },
         { id: "liontravel",name: "雄獅旅遊",    aliases: ["雄獅", "liontravel"], cats: ["travel", "travelagency"] },
         { id: "cal",       name: "華航",        aliases: ["華航", "中華航空", "china airlines"], cats: ["airline"] },
+        { id: "tigerair",  name: "台灣虎航",    aliases: ["虎航", "台灣虎航", "tigerair"], cats: ["airline"] },
         { id: "eva",       name: "長榮航空",    aliases: ["長榮", "長榮航空", "eva air"], cats: ["airline"] },
         { id: "starlux",   name: "星宇航空",    aliases: ["星宇", "starlux"], cats: ["airline"] },
         // 支付方式（把支付本身當通路查：輸入「line pay 500」）
@@ -134,6 +150,7 @@
         { id: "c-conv",    name: "超商",        aliases: ["超商", "便利商店"], cats: ["convenience"] },
         { id: "c-super",   name: "超市",        aliases: ["超市", "量販", "量販店"], cats: ["supermarket"] },
         { id: "c-dining",  name: "餐飲",        aliases: ["餐飲", "餐廳", "吃飯", "美食", "聚餐"], cats: ["dining"] },
+        { id: "c-shake",   name: "手搖飲",      aliases: ["手搖", "手搖飲", "飲料店"], cats: ["handshake"] },
         { id: "c-delivery",name: "外送",        aliases: ["外送", "外送平台"], cats: ["delivery"] },
         { id: "c-online",  name: "網購",        aliases: ["網購", "電商", "網路購物"], cats: ["online"] },
         { id: "c-drug",    name: "藥妝",        aliases: ["藥妝", "藥妝店"], cats: ["drugstore"] },
@@ -179,11 +196,13 @@
 
         // ===== 國泰 CUBE（Level 2 = 3%；方案擇一，需在 App 切換）=====
         {
-            card: "cube", title: "集精選", rate: CUBE_RATE, base: 0.3,
+            // 2026/9/30 查證：部落格載集精選已降為 2%（官方主頁反爬無法直驗，保守採低值）
+            card: "cube", title: "集精選", rate: 2.0, base: 0.3,
             channels: ["pxmart", "carrefour", "lopia", "seven", "family", "cpc", "ikea"],
             conditions: [
                 { tag: "切方案", text: "需在 CUBE App 將權益方案切到「集精選」（隨切隨生效）" },
-                { tag: "Level 2", text: "需國泰帳戶自扣或 CUBE App 繳本行卡費（月底前 3 個工作日設定，次月適用）；財管會員 Level 3 = 3.3%" }
+                { tag: "待確認", text: "2026/9 查證：集精選疑降為 2%（部落格資訊，官方頁反爬無法直驗）；實際以官方公告為準" },
+                { tag: "Level 2", text: "需國泰帳戶自扣或 CUBE App 繳本行卡費（月底前 3 個工作日設定，次月適用）" }
             ]
         },
         {
@@ -217,9 +236,9 @@
         {
             card: "cube", title: "LINE Pay 領券加碼", rate: 2.0, base: 0.3,
             channels: ["linepay"],
-            cap: { spend: 2500, period: "月", text: "每月上限 50 點" },
+            cap: { spend: 2941, period: "月", text: "加碼 1.7% 每月上限 50 點（0.3%+1.7%=2%）" },
             validThrough: "2026-10-31",
-            conditions: [{ tag: "需領券", text: "需先在 CUBE App 領券；排除外送、百貨內門市、海外門市。11 月後是否續辦未公告" }]
+            conditions: [{ tag: "需領券", text: "需先在 CUBE App 領券；排除外送、百貨內門市、海外門市。11 月後是否續辦未公告（11 月初留意）" }]
         },
         {
             card: "cube", title: "一般消費", rate: 0.3, general: true,
@@ -239,25 +258,50 @@
             card: "richart", title: "Pay著刷（LINE Pay 領券）", rate: 3.8, base: 2.3,
             channels: ["linepay"],
             cap: { spend: 33333, period: "月", text: "領券加碼 +1.5% 每月上限 500 點" },
+            validThrough: "2026-09-30",  // 只發 7–9 月券，10 月起未公告
             conditions: [
-                { tag: "需領券", text: "LINE Pay 直刷 2.3%，需 App 領券再 +1.5% 才到 3.8%" },
+                { tag: "需領券", text: "LINE Pay 直刷 2.3%，需 App 領券再 +1.5% 才到 3.8%（券只發到 9 月，Q4 未公告）" },
                 { tag: "切方案", text: "需切到「Pay著刷」方案" },
                 { tag: "需自扣", text: "需 Richart 帳戶自扣（LEVEL 2）" }
             ]
         },
         {
-            card: "richart", title: "數趣刷", rate: 3.3, base: 0.3,
-            channels: ["shopee", "momo", "coupang", "pchome", "taobao", "amazon", "books", "iherb", "shein"],
+            card: "richart", title: "Pay著刷（LINE Pay）", rate: 2.3, base: 0.3,
+            channels: ["linepay"],
+            validThrough: "2027-12-31",
             conditions: [
-                { tag: "切方案", text: "需切到「數趣刷」方案（可每日切換，依消費當下方案計）" },
+                { tag: "切方案", text: "需切到「Pay著刷」方案（領券加碼 3.8% 已於 2026/9/30 截止，Q4 未公告）" },
                 { tag: "需自扣", text: "需 Richart 帳戶自扣（LEVEL 2）" }
+            ]
+        },
+        {
+            card: "richart", title: "數趣刷", rate: 3.3, base: 0.3,
+            channels: ["shopee", "momo", "coupang", "pchome", "taobao", "amazon", "books", "iherb", "shein",
+                       "steam", "netflix", "disney", "chatgpt", "claude", "notion", "canva", "perplexity"],
+            validThrough: "2027-12-31",
+            conditions: [
+                { tag: "切方案", text: "需切到「數趣刷」方案（2026/9 查證：通路已擴充遊戲影音、AI 服務、線上課程）" },
+                { tag: "需自扣", text: "需 Richart 帳戶自扣（LEVEL 2）" }
+            ]
+        },
+        {
+            card: "richart", title: "Chill刷", rate: 10.0, base: 0.3,
+            channels: ["haidilao", "wooma", "cha6", "jhanji", "50lan", "dejheng"],
+            cats: ["handshake", "hotpot"],
+            validThrough: "2027-12-31",
+            conditions: [
+                { tag: "切方案", text: "需切到「Chill刷」方案（已轉常設：指定火鍋燒肉酒吧＋手搖 10%）" },
+                { tag: "需自扣", text: "需 Richart 帳戶自扣（LEVEL 2，否則僅 1.3%）" },
+                { tag: "平台除外", text: "經 Uber Eats/蝦皮等平台下單降為 3.3%；經 momo/百貨/大全聯/飯店不加碼" }
             ]
         },
         {
             card: "richart", title: "天天刷", rate: 3.3, base: 0.3,
             cats: ["convenience", "transport", "gas", "drugstore"],
+            validThrough: "2027-12-31",
             conditions: [
                 { tag: "切方案", text: "需切到「天天刷」方案（超商、交通、加油、藥妝）" },
+                { tag: "超商限台新Pay", text: "全家/7-11 需以台新 Pay 綁定支付才有 3.3%；實體卡或 LINE Pay 刷超商 = 0 回饋" },
                 { tag: "需自扣", text: "需 Richart 帳戶自扣（LEVEL 2）" }
             ]
         },
@@ -296,8 +340,19 @@
             ]
         },
         {
+            card: "laidian", title: "IP商店/售票/影城", rate: 7.0, base: 2.0,
+            channels: ["vieshow", "showtimes", "opentix", "tixcraft", "kktix", "kham"],
+            cats: ["cinema", "ticketing"],
+            cap: { spend: 4000, period: "月", text: "+5% 每月歸戶上限 200 點" },
+            validThrough: "2026-12-31",
+            conditions: [
+                { tag: "需LINE Pay", text: "以 LINE Pay 付款（CHIIKAWA SHOP、OPENTIX、拓元、寬宏、KKTIX、威秀、秀泰等）" },
+                { tag: "前置設定", text: "須電子帳單 + 綁定 LINE Pay" }
+            ]
+        },
+        {
             card: "laidian", title: "偶數日指定通路", rate: 7.0, base: 2.0, dynamic: "evenDay",
-            channels: ["mcd", "starbucks", "wowprime", "watsons", "ikea", "nike"],
+            channels: ["mcd", "starbucks", "wowprime", "watsons", "ikea", "nike", "poya", "decathlon"],
             cap: { spend: 3000, period: "月", text: "+5% 每月上限 150 點" },
             conditions: [
                 { tag: "偶數日", text: "限每月 2、4、6…日，需以 LINE Pay 付款（指定 50+ 家通路）" },
@@ -347,30 +402,30 @@
             excludeCats: ["insurance"]
         },
 
-        // ===== 玉山 U Bear（⚠️ 權益僅至 2026/8/31，9 月起未公告）=====
+        // ===== 玉山 U Bear（2026/9/1 起新制至 2027/2/28；訂閱 10% 已取消）=====
         {
-            card: "ubear", title: "網購/行動支付", rate: 3.0, base: 1.0,
-            cats: ["online", "mobilepay"],
-            excludeChannels: ["seven", "family", "hilife", "okmart"],
-            cap: { spend: 7500, period: "期", text: "加碼 2% 每期上限 150 元（上半年 200 元，已調降）" },
-            validThrough: "2026-08-31",
-            conditions: [{ tag: "前置設定", text: "需帳單 e 化 + 玉山帳戶自扣，兩者都沒設定基本回饋 0%" }]
+            card: "ubear", title: "網路消費", rate: 3.0, base: 1.0,
+            cats: ["online"],
+            // 9/1 新制明文排除：超商、訂閱平台（只剩基本 1%）、行動支付不算網購
+            excludeChannels: ["seven", "family", "hilife", "okmart",
+                              "netflix", "chatgpt", "gemini", "steam", "nintendo", "psn"],
+            excludeCats: ["mobilepay"],
+            cap: { spend: 7500, period: "期", text: "加碼 2% 每期上限 150 元" },
+            validFrom: "2026-09-01", validThrough: "2027-02-28",
+            conditions: [{ tag: "前置設定", text: "需帳單 e 化（加碼條件）；基本回饋：e 化＋自扣兩者都綁 1%、只綁一項 0.5%、都沒綁 0%" }]
         },
         {
-            card: "ubear", title: "指定訂閱", rate: 10.0, base: 0,
-            channels: ["netflix", "chatgpt", "gemini", "steam", "nintendo", "psn"],
-            cap: { spend: 1000, period: "期", text: "每期上限 100 元；超過上限後該類消費「無任何回饋」" },
-            validThrough: "2026-08-31",
-            conditions: [
-                { tag: "直接扣款", text: "須於原平台直接扣款，Google 代扣不符資格" },
-                { tag: "前置設定", text: "需帳單 e 化 + 玉山帳戶自扣" }
-            ]
+            card: "ubear", title: "LINE Pay 專案", rate: 5.0, base: 1.0,
+            channels: ["linepay"],
+            cap: { spend: 10000, period: "月", text: "每月上限 500 點 e point" },
+            validFrom: "2026-09-01", validThrough: "2026-11-30",
+            conditions: [{ tag: "單筆滿500", text: "單筆滿 NT$500 才有 5%；限 2026/9/1–11/30" }]
         },
         {
             card: "ubear", title: "一般消費", rate: 1.0, general: true,
             excludeCats: ["insurance"],
-            validThrough: "2026-08-31",
-            conditions: [{ tag: "前置設定", text: "帳單 e 化 0.5% + 玉山帳戶自扣 0.5%，都沒設定 = 0%" }]
+            validThrough: "2027-02-28",
+            conditions: [{ tag: "前置設定", text: "帳單 e 化＋玉山帳戶自扣兩者都綁 = 1%，只綁一項 = 0.5%，都沒綁 = 0%（訂閱平台已被排除加碼，只有這條）" }]
         },
 
         // ===== 永豐 DAWAY（GO 舊戶；需綁 LINE Pay）=====
@@ -454,7 +509,22 @@
             card: "ctbc", title: "脆好購電商", rate: 5.0, base: 1.0,
             channels: ["taobao", "shopee", "coupang"],
             cap: { spend: 2500, period: "季", text: "加碼 4% 每季上限 100 點" },
-            conditions: [{ tag: "需登錄", text: "每月 6 日 10:00 開放 8,000 名登錄" }]
+            validThrough: "2026-12-31",
+            conditions: [{ tag: "需登錄", text: "每月 6 日 10:00 開放 8,000 名登錄，每季需重新登錄" }]
+        },
+        {
+            card: "ctbc", title: "脆自遊 Trip.com/Airbnb", rate: 5.0, base: 1.0,
+            channels: ["trip", "airbnb"],
+            cap: { spend: 2500, period: "季", text: "加碼 4%+1% 每季上限 100 點" },
+            validThrough: "2026-12-31",
+            conditions: [{ tag: "需登錄", text: "每月 6 日 10:00 開放登錄" }]
+        },
+        {
+            card: "ctbc", title: "脆自遊 台灣虎航", rate: 10.0, base: 1.0,
+            channels: ["tigerair"],
+            cap: { spend: 2222, period: "季", text: "加碼 9%+1% 每季上限 200 點" },
+            validThrough: "2026-12-31",
+            conditions: [{ tag: "需登錄", text: "每月 6 日 13:00 開放登錄" }]
         },
         {
             card: "ctbc", title: "國內外一般", rate: 1.0, general: true, scope: "any",
@@ -474,7 +544,7 @@
             ]
         },
         {
-            card: "fubonj", title: "泰國實體加碼", rate: 6.0, base: 1.0, scope: "overseas",
+            card: "fubonj", title: "泰國實體加碼", rate: 6.0, base: 3.0, scope: "overseas",
             cats: ["th"],
             cap: { spend: 33333, period: "季", text: "1%+5%，加碼每季上限與日韓共用" },
             validThrough: "2026-09-30",
@@ -484,9 +554,10 @@
             ]
         },
         {
-            card: "fubonj", title: "日韓基礎", rate: 3.0, scope: "overseas",
-            cats: ["jp", "kr"],
-            conditions: [{ tag: "前置設定", text: "需電子帳單或富邦帳戶自扣，否則 0.5%" }]
+            card: "fubonj", title: "日韓泰基礎", rate: 3.0, scope: "overseas",
+            cats: ["jp", "kr", "th"],
+            validThrough: "2026-12-31",
+            conditions: [{ tag: "前置設定", text: "需富邦帳戶自扣或電子帳單（且取消實體帳單），否則僅 0.5%（2026/9 查證：泰國已與日韓同為 3%）" }]
         },
         {
             card: "fubonj", title: "日本交通卡儲值", rate: 10.0, base: 3.0,
@@ -523,27 +594,27 @@
             channels: ["shopee"],
             excludeCats: ["delivery", "mobilepay"],
             cap: { spend: 29600, period: "期", text: "加碼 3% 每期上限 888 點" },
-            validThrough: "2026-09-30",
+            validThrough: "2026-12-31",  // 官方公告：辦法不變展延至 12/31
             conditions: [
                 { tag: "限直刷", text: "限實體卡/卡號直接結帳；LINE Pay、街口、Apple Pay 等僅 0.88%" },
                 { tag: "排除外送", text: "餐飲排除 foodpanda、Uber Eats" },
-                { tag: "自扣+1%", text: "完成滙豐帳戶自扣再 +1%（上限 200 點/期）" }
+                { tag: "自扣+1%", text: "完成滙豐帳戶自扣再 +1%（上限 200 點/期，以前兩期帳單計算）" }
             ]
         },
         {
             card: "hsbc", title: "一般消費", rate: 0.88, general: true, scope: "any",
             excludeCats: ["insurance", "eu", "mobilepay"],
-            validThrough: "2026-09-30",
-            conditions: [{ tag: "排除歐盟", text: "歐盟 27 國+英國實體交易不回饋；第三方支付僅 0.88%" }]
+            validThrough: "2026-12-31",
+            conditions: [{ tag: "排除歐英", text: "歐盟 27 國＋英國實體交易不回饋；第三方支付僅 0.88%" }]
         },
 
-        // ===== 華南 SnY（權益已縮水，僅剩紅利 3 倍）=====
+        // ===== 華南 SnY（權益已縮水，僅剩紅利 3 倍；2026/9 查證為全年活動）=====
         {
             card: "sny", title: "紅利 3 倍", rate: 0.6, base: 0, general: true,
             excludeCats: ["online", "insurance"],
             cap: { spend: 25000, period: "期", text: "每期上限 3,000 點" },
-            validThrough: "2026-09-30",
-            conditions: [{ tag: "門檻", text: "當期一般消費滿 NT$1,000 才有 3 倍，且不含網路消費" }]
+            validThrough: "2026-12-31",
+            conditions: [{ tag: "門檻", text: "當期一般消費滿 NT$1,000 才有 3 倍；「不含網路消費」為舊條款記載，現行活動頁未明列，保守沿用待人工複核" }]
         },
 
         // ===== 台灣樂天 Panda J（免登錄）=====
@@ -579,7 +650,7 @@
 
     const CARD_RULES = {
         meta: {
-            updated: "2026-08-01",
+            updated: "2026-09-30",
             settings: SETTINGS,
             settingsText: `試算假設：CUBE Level ${SETTINGS.cubeLevel}、DAWHO ${SETTINGS.dawhoTier}、DAWAY ${SETTINGS.dawayTier}、Only LV${SETTINGS.onlyLevel}（可在 rules.js 調整）`
         },
